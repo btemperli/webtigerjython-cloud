@@ -326,7 +326,7 @@ function replaceStringInFile(filePath, searchString, replacementString) {
 
             // (7) logo
             oldLinkText = '<li id="logo-name">WebTigerJython</li>';
-            newLinkText = '<li id="logo-name">WebTigerJython</li><li id="logo-v2">CLOUD by BT</li>';
+            newLinkText = '<li id="logo-name">WebTigerJython</li><li id="logo-v2" title="Cloud-Version by Beat Temperli">CLOUD v2.0</li>';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
             // (8) favicon
