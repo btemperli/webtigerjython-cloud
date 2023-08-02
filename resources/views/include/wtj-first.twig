@@ -132,7 +132,7 @@
             url: getUrl() + '/wtj-share/add',
             data: { code: transferableCode },
             success: (data) => {
-                const url = `${getUrl()}/wtj/${data.share_id}`;
+                const url = `${getUrl()}/${data.share_id}`;
                 shareSuccess(url);
             },
             error: (data, status, error) => {
@@ -217,7 +217,7 @@
                 markers: markings
             },
             success: (data) => {
-                const url = `${getUrl()}/wtj/${data.share_id}/${data.return_id}`;
+                const url = `${getUrl()}/${data.share_id}/${data.return_id}`;
                 shareSuccess(url);
             },
             error: (data, status, error) => {
@@ -227,7 +227,7 @@
     }
 
     function restart() {
-        window.location.href = getUrl() + '/wtj';
+        window.location.href = getUrl() + '';
     }
 
     function addElementAfter(el, insertElement) {
