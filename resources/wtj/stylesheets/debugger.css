@@ -1,0 +1,127 @@
+#debugger-pane {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+#debugger-pane-variables {
+    height: calc((var(--vh, 1vh) * 94.5 * 0.5) - 40px);
+    margin: 0;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+
+.debugger-pane-tabcontent > li {
+    float: left;
+}
+
+.debugger-pane-tabcontent > ul {
+    height: unset;
+}
+
+#right-content > div.debug-mode {
+    height: calc(var(--vh, 1vh) * 94.5 * 0.5);
+    overflow: hidden;
+}
+
+.debugger-variable-body {
+    height: fit-content;
+    height: -moz-max-content; /* For Firefox */
+    max-height: calc(((var(--vh, 1vh) * 94.5 * 0.5) - 107px) * 0.5);
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.debugger-pane-variables-view {
+    height: fit-content;
+    height: -moz-max-content; /* For Firefox */
+    max-height: calc(((var(--vh, 1vh) * 94.5 * 0.5) - 107px) * 0.5);
+    display: flex;
+    overflow-y: auto;
+    float: left;
+}
+
+.debugger-var-full-size {
+    max-height: calc(((var(--vh, 1vh) * 94.5 * 0.5) - 97px) - 41px);
+}
+
+.debugger-var-full-size > ul {
+    max-height: calc(((var(--vh, 1vh) * 94.5 * 0.5) - 97px) - 41px);
+}
+
+.debugger-pane-variables-view > li.row {
+    width: 100%;
+    padding: 0 1em 0;
+    display: inline-block;
+    float: left;
+    margin-bottom: 0;
+}
+
+.debugger-pane-variables-view > li > p {
+    display: inline-block;
+    padding: 0.25em;
+    overflow: auto;
+    margin: .5em 0 .5em 0;
+    font-size: 16px;
+}
+
+
+.debugger-pane-variables-view > li > input.debugger-pane-variables-view-input {
+    display: inline-block;
+    padding: 0.25em;
+    overflow: auto;
+    margin: .5em 0 .5em 0;
+    height: unset;
+    line-height: unset;
+    overflow: unset;
+    font-size: 16px;
+}
+
+#debugger-pane-variables-locals {
+}
+
+#debugger-pane-variables-globals {
+}
+
+#debugger-pane-output {
+    width: 100%;
+    overflow-y: auto;
+    height: calc((var(--vh, 1vh) * 94.5 * 0.5) - 48px); /*-TODO-*/
+}
+
+.debugger-pane-tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    float: left;
+}
+
+button.debugger-pane-tab {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.debugger-pane-tab button:hover {
+    background-color: #ddd;
+}
+
+.debugger-pane-tab button.active {
+    background-color: #ccc;
+}
+
+.debugger-pane-tabcontent {
+    display: none;
+    border: 0;
+    box-shadow: unset;
+}
+
+button.debugger-pane-tablinks {
+    margin: 0.5em 0.5em;
+}

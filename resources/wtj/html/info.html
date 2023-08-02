@@ -1,0 +1,635 @@
+<head>
+    <link rel="stylesheet" href="../stylesheets/info.css">
+</head>
+<body>
+<h1 data-translate="info-title"><strong>Informationen &uuml;ber WebTigerJython</strong></h1>
+<p data-translate="info-intro-1">WebTigerJython ist eine sch&uuml;lerfreundliche Programmierumgebung f&uuml;r die Programmiersprache Python. Die
+    Lernumgebung ist speziell f&uuml;r den Schulunterricht mit dem Lehrmittel "</p><a
+            href="https://www.klett.ch/Shop/Artikel/978-3-264-84463-4/Empfehlung/" target="_blank" rel="noopener">Einfach
+        Informatik: Programmieren 7-9</a><p data-translate="info-intro-2">" (Klett und Balmer Verlag) von Juraj Hromkovič und Tobias Kohn konzipiert.</p>
+<h3><strong>Features von WebTigerJython</strong></h3>
+<p>1.0.0 </p><p data-translate="info-release-1.0.0">Basisversion</p>
+<br/>
+<p>1.1.5 </p><p data-translate="info-release-1.1.0">Erweiterter Sprachsupport (Franz&ouml;sisch & Russisch)</p>
+<br/>
+<p>1.2.0 </p><p data-translate="info-release-1.2.0">Verbesserte Turtle Funktionalit&auml;t</p>
+<br/>
+<p>1.2.4 </p><p data-translate="info-release-1.2.1">Python 3 Support</p>
+<br/>
+<p>1.3.3 </p><p data-translate="info-release-1.3.0">GPanel Support</p>
+<br/>
+<p>1.4.3 </p><p data-translate="info-release-1.4.0">Debugger Support</p>
+<br/>
+<p>1.6.1 </p><p data-translate="info-release-1.6.1">Datenbanken Support</p>
+<h3><strong>Cloud-Adaption von Beat Temperli</strong></h3><p>x.0 </p><p>Speichern & Teilen</p><br><p>x.1 </p><p>Gespeicherte Programme überarbeiten & Änderungen markieren</p><br><br><p><i>Diese Adaption ist mit der Erlaubnis vom TigerJython-Team entstanden.</i></p><h3 data-translate="info-turtle-functions-title"><strong>Unterst&uuml;tzte Turtle Funktionen</strong></h3>
+<p data-translate="info-turtle-functions-intro">Die folgenden Turtle spezifischen Befehle werden in WebTigerJython zus&auml;tzlich zum normalen Python Syntax unterst&uuml;tzt:</p>
+
+<div class="wrapper">
+    <div class="table">
+        <!-- TODO  Include a link to GTurtle and GPanel documentation instead of listing it here. Maybe use something like readthedocs: https://readthedocs.org/-->
+        <div class="row header">
+            <div class="cell" data-translate="info-function-title">Befehl</div>
+            <div class="cell" data-translate="info-abbreviation-title">Abk&uuml;rzung</div>
+            <div class="cell" data-translate="info-description-title">Beschreibung</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="blue">from</p> gturtle <p class="blue">import</p> *</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-import">Die Schildkr&ouml;tenbefehle laden. Erst danach versteht der
+                Computer die Befehle f&uuml;r die Turtle.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">makeTurtle()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">&nbsp;</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-makeTurtle">Die Turtle auf der Zeichenfl&auml;che erstellen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">forward(<p class="purple" data-translate="info-number-of-steps">Anzahl Schritte</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">fd(<p class="purple" data-translate="info-number-of-steps">Anzahl Schritte</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-forward">Anzahl Schritte vorw&auml;rts gehen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">back(<p class="purple" data-translate="info-number-of-steps">Anzahl Schritte</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">bk(<p class="purple" data-translate="info-number-of-steps">Anzahl Schritte</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-backward">Anzahl Schritte r&uuml;ckw&auml;rts gehen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">left(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">lt(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-left">Auf der Stelle um den Winkel nach links drehen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">right(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">rt(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-right">Auf der Stelle um den Winkel nach rechts drehen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setPenColor(<p class="purple" data-translate="info-color">Farbe</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">spc(<p class="purple" data-translate="info-color">Farbe</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setpencolor">Die Farbe des Stiftes setzen. Die Farbe wird in Englisch
+                angegeben. Die Turtle erh&auml;lt eine Umrandung in der gew&auml;hlten Stiftfarbe.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">
+                setPenWidth(<p class="purple" data-translate="info-penwidth">Stiftbreite</p>)
+                <br/>
+                setLineWidth(<p class="purple" data-translate="info-penwidth">Stiftbreite</p>)
+            </div>
+            <div class="cell" data-title="Abk&uuml;rzung">spw(<p class="purple" data-translate="info-penwidth">Stiftbreite</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setpenwidth">Die Breite des Stiftes setzen. Die Breite wird in Pixeln
+                angegeben.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">
+                <p class="blue">print</p>(<p class="purple" data-translate="info-text">"Text"</p>)
+                <br/>
+                <p class="blue">print</p>(<p class="purple" data-translate="info-arithmetic-expression">arithm. Ausdruck</p>)
+            </div>
+            <div class="cell" data-title="Abk&uuml;rzung">&nbsp;</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-print">Den Text zwischen Anf&uuml;hrungszeichen oder das Resultat des
+                arithmetischen Ausdrucks ins Ausgabe-Fenster schreiben.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">delay(<p class="purple" data-translate="info-time">Zeit</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">&nbsp;</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-delay">Eine Anzahl Millisekunden warten, bevor das Programm weiterl&auml;uft.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">speed(<p class="purple" data-translate="info-speed">Geschwindigkeit</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">&nbsp;</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-speed">&Auml;ndert die Geschwindigkeit der Turtle. Wird als
+                Geschwindigkeit -1 angegeben, so l&auml;uft die Turtle, so schnell sie nur kann. Die Turtle l&auml;uft
+                am langsamsten mit Geschwindigkeit 1.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">hideTurtle()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">ht()</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-ht">Die Turtle unsichtbar machen, damit die Bilder schnell
+                gezeichnet werden.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">showTurtle()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">st()</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-st">Die Turtle wieder sichtbar machen, damit du siehst, wie sie
+                zeichnet.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">
+                <p class="blue">repeat</p>
+                <p class="purple" data-translate="info-number-of">Anzahl</p>:
+                <p class="nl" data-translate="info-body">K&ouml;rper</p>
+            </div>
+            <div class="cell" data-title="Abk&uuml;rzung">&nbsp;</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-repeat">Einen Programmteil eine Anzahl Male ausf&uuml;hren. Der K&ouml;rper
+                mit den Befehlen, die wiederholt werden, muss einger&uuml;ckt sein.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">penUp()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">pu()</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-pu">Den Stift hochheben und nicht mehr zeichnen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">penDown()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">pd()</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-pd">Den Stift senken und wieder zeichnen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">dot(<p class="purple">d</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-dot">Zeichnet einen ausgef&uuml;llten Punkt mit Durchmesser d an der
+                aktuellen Position der Turtle.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setHeading(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">heading(<p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setheading">Setzt den Winkel nicht relativ zur Turtle sondern absolut, d.h.
+                relativ zum Fenster. Ein Winkel von 0 bewirkt, dass die Turtle direkt nach oben zeigt, ein Winkel von 90
+                zeigt nach rechts usw.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">heading()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-heading">Gibt den Winkel der Turtle absolut zur Zeichenfl&auml;che
+                zur&uuml;ck.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setRandomHeading()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setRandomHeading">Setzt den Winkel der Turtle zuf&auml;llig zwischen 0 und 360°.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">leftCircle(<p class="purple" data-translate="info-radius">Radius</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-leftCircle">Bewegt die Turtle auf einem
+                Kreis mit dem gegebenen Radius nach links.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">rightCircle(<p class="purple" data-translate="info-radius">Radius</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-rightCircle">Bewegt die Turtle auf einem
+                Kreis mit dem gegebenen Radius nach rechts.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">leftArc(<p class="purple" data-translate="info-radius">Radius</p>,
+                <p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-leftArc">Bewegt die Turtle auf einem
+                Bogen mit dem gegebenen Radius und Winkel nach links.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">rightArc(<p class="purple" data-translate="info-radius">Radius</p>,
+                <p class="purple" data-translate="info-angle">Winkel</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-rightArc">Bewegt die Turtle auf einem
+                Bogen mit dem gegebenen Radius und Winkel nach rechts.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">msgDlg(<p class="purple" data-translate="info-text">"Text"</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-msgDlg">Gibt den Text in einem eigenen kleinen Fenster aus. Das Fenster
+                muss mit "OK" zuerst weggeklickt werden, bevor das Programm fortf&auml;hrt.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">label(<p class="purple" data-translate="info-text">"Text"</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-label">Gibt den Text in der Turtle Zeichenfl&auml;che an der aktuellen
+                Position der Turtle aus.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">x = input(<p class="purple" data-translate="info-question">"Frage"</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-input">Der Computer zeigt in einem Fenster die Frage an und speichert
+                den vom Benutzer eingegebenen Wert anschliessend in der Variable ab.
+                Es gibt diese Funktion in drei weiteren Varianten, bei welchen jeweils ein bestimmter Datentyp verlangt
+                wird: inputInt("Frage"), inputFloat("Frage") und inputString("Frage").
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setFillColor(<p class="purple" data-translate="info-color">Farbe</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung">setColor(<p class="purple" data-translate="info-color">Farbe</p>)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setfillcolor">Setzt die F&uuml;llfarbe. Die Farbe wird in Englisch angegeben.
+                Der K&ouml;rper der Turtle wird in der gew&auml;hlten F&uumlllfarbe angezeigt.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">startPath()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-startpath">Startet die Aufzeichnung der Turtlebewegung zum
+                nachtr&auml;glichen F&uuml;llen.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">fillPath()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-fillpath">Verbindet die aktuelle Turtleposition mit dem Startpunkt und
+                f&uuml;llt die geschlossene Figur mit der F&uuml;llfarbe.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">sqrt(<p class="purple" data-translate="info-number">Zahl</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-sqrt">Berechnet die Wurzel der Zahl.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">isInteger(<p class="purple" data-translate="info-number">Zahl</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-isinteger">Gibt einen Wahrheitswert zur&uuml;ck (true oder false) welcher
+                angibt, ob die Zahl ein Integer ist oder nicht.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">c = makeColor(<p class="purple" data-translate="info-color">Farbe</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung"><p data-translate="info-description-makecolor-intro">Gibt eine Farbe in der Hexadezimal Schreibweise zur&uuml;ck und
+                speichert sie in der Variable c. Die Farbe kann zum Beispiel folgendermassen definiert werden:</p><br/>
+                <i>RGB</i><p data-translate="info-description-makecolor-rgb">: makeColor(R, G, B), makeColor("rgb(R,G,B)") wobei R, G und B entweder alles Integer Werte
+                zwischen 0 und 255 sind Float Werte zwischen 0 und 1.</p><br/>
+                <i>RGBA</i><p data-translate="info-description-makecolor-rgba">: makeColor(R,G,B,A), makeColor("rgba(R,G,B,A")) die Werte f&uuml;r R, G und B sind gleich
+                wie oben. A ist ein Float zwischen 0 und 1 und gibt die Transparenz an.</p><br/>
+                <i data-translate="info-description-makecolor-rainbow">Regenbogen</i><p data-translate="info-description-makecolor-rainbow-descr">: makeColor("rainbow", 0.5) gibt eine Farbe des Regenbogenspektrums zur&uuml;ck. Der
+                zweite Werte ist ein Float zwischen 0 und 1.</p><br/>
+                <i data-translate="info-description-makecolor-hexadecimal">Hexadezimal</i><p data-translate="info-description-makecolor-hexadecimal-descr">: makeColor("#7FFFD4") als Farbe wird ein Hexadezimal String angegeben.</p><br/>
+                <i data-translate="info-color">Farbe</i><p data-translate="info-description-makecolor-colorstring">: makeColor("Aqua-Marine") als Farbe wird ein Farbname angegeben.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getPixelColorStr()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-getpixelcolorstr">Gibt die Farbe des Pixels unter der Turtle zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getKey()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-getkey">Gibt die zuletzt gedr&uuml;ckte Taste als String zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getKeyCode()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-getkeycode">Gibt die zuletzt gedr&uuml;ckte Taste als ASCII Code zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getPos()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-getpos">Gibt die aktuelle Koordinaten Position der Turtle als Liste zur&uuml;ck.
+                Die x-Koordinate kann mit getPos()[0] abgefragt werden und die y-Koordinate mit getPos()[1].</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getX()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-getx">Gibt die x-Koordinaten der aktuellen Turtle Position zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getY()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-gety">Gibt die y-Koordinaten der aktuellen Turtle Position zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">distance(<p class="purple">x</p>, <p class="purple">y</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-distance">Gibt die Entfernung der Turtle zum Punkt (x, y) zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">towards(<p class="purple">x</p>, <p class="purple">y</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-towards">Gibt die Richtung der Turtle (in Grad) zur Position (x, y) zur&uuml;ck.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">moveTo(<p class="purple">x</p>, <p class="purple">y</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-moveto">Verschiebt die Turtle an den Punkt (x, y). Beim Verschieben zeichnet die Turtle.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setPos(<p class="purple">x</p>, <p class="purple">y</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setpos">Verschiebt die Turtle an den Punkt (x, y), ohne dabei zu zeichnen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setX(<p class="purple">x</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-setx">Verschiebt die Turtle an die x-Koordinate, ohne dabei zu zeichnen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">setY(<p class="purple">y</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-sety">Verschiebt die Turtle an die y-Koordinate, ohne dabei zu zeichnen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">clean()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-clean">L&ouml;scht die Turtlespuren. Die Turtle bleibt am Ort sichtbar.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">clearScreen()</div>
+            <div class="cell" data-title="Abk&uuml;rzung">cs()</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-cs">L&ouml;scht die Turtlespuren und setzt die Turtle zur&uuml;ck an
+                die Anfangsposition in der Mitte der Zeichenfl&auml;che.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">clear()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-clear">L&ouml;scht die Turtlespuren. Die Turtle bleibt am Ort und macht
+                sich unsichtbar.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">Screen().onkey(<p class="purple" data-translate="info-function">Funktion</p>, <p class="purple" data-translate="info-key">"Taste"</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung"><p data-translate="info-description-onkey">Ruft die angegeben Funktion beim Dr&uuml;cken der angegeben Taste auf. Schreibe den Funktionsnamen ohne Klammern.
+                Damit die Tastendrucke von deiner externen Tastatur abgefangen werden k&ouml;nnen, musst du in die Zeichenfl&auml;che klicken nachdem du das Progamm
+                gestartet hast.
+                Rufe anschliessend die Funktion Screen().listen() auf, damit die Zeichenfl&auml;che auf deine Tasteneingabe h&ouml;rt.</p>
+                <br/>
+                <p data-translate="info-example">Beispiel:</p>
+                <pre>def moveForward():<br/>    fd(50)<br/><br/>Screen().onkey(moveForward, "w")<br/>Screen().listen()</pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">Screen().onclick(<p class="purple" data-translate="info-function">Funktion</p>)</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung"><p data-translate="info-description-onclick">Ruft die angegebene Funktion beim Klicken auf die Zeichenfl&auml;che auf.
+                Schreibe den Funktionsnamen ohne Klammern. Es werden
+                automatisch die x- und y-Koordinaten des Klicks der Funktion &uuml;bergeben.
+                Rufe anschliessend die Funktion Screen().listen() auf, damit die Zeichenfl&auml;che auf deine Eingabe h&ouml;rt.</p>
+                <br/>
+                <p data-translate="info-example">Beispiel:</p>
+                <pre>def goTo(x, y):<br/>    moveTo(x, y)<br/><br/>Screen().onclick(goTo)<br/>Screen().listen()</pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">Screen().listen()</div>
+            <div class="cell" data-title="Abk&uuml;rzung"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-listen">F&auml;ngt Klicks und Tasteneingaben in der Zeichenfl&auml;che ab.
+            Diese Funktion wird zusammen mit Screen().onclick(..) und Screen().onkey(..) verwendet. Es gen&uuml;gt, wenn du
+                diese Funktion nur einmal pro Programm aufrufst.</div>
+        </div>
+    </div>
+</div>
+
+<h3 data-translate="info-database-functions-title"><strong>Unterst&uuml;tzte Datenbankenfunktionen</strong></h3>
+<p data-translate="info-database-functions-intro">Die folgenden Befehle aus der Datenbankenbibliothek werden in WebTigerJython zus&auml;tzlich zum normalen Python Syntax unterst&uuml;tzt:</p>
+
+<div class="wrapper">
+    <div class="table">
+        <div class="row header">
+            <div class="cell" data-translate="info-function-title">Befehl</div>
+            <div class="cell" data-translate="info-example-title">Beispiel</div>
+            <div class="cell" data-translate="info-description-title">Beschreibung</div>
+        </div>
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="blue">from</p> database1 <p class="blue">import</p> *</div>
+            <div class="cell" data-title="Beispiel"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-import-database">L&auml;dt die Befehle aus der Datenbankenbibliothek. Erst danach versteht der Computer die Befehle f&uuml;r die Datenbank.
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple">DB</p> = Database(<p class="purple" data-translate="info-database-name">"Name"</p>)</div>
+            <div class="cell" data-title="Beispiel">my_db = Database("my_database")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database">&Ouml;ffnet die Datenbank mit dem angegebenen Namen. Falls die Datenbank noch nicht existiert, wird sie erstellt.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">getDatabases()</div>
+            <div class="cell" data-title="Beispiel">print(getDatabases())</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-getDatabases">Gibt die Liste aller existierenden Datenbanken zurück. Beachte bitte, dass diese Funktion in Mozilla Firefox nicht unterstützt wird, wir empfehlen den Google Chrome Browser zu benutzen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">removeDatabase(<p class="purple" data-translate="info-database-name">"Name"</p>)</div>
+            <div class="cell" data-title="Beispiel">removeDatabase("my_database")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-removeDatabase">L&ouml;scht die Datenbank mit dem angegebenen Namen.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple">DB</p>.<p class="purple" data-translate="info-variable-name">Variablenname</p> = <p class="purple" data-translate="info-value">Wert</p></div>
+            <div class="cell" data-title="Beispiel">my_db.x = 10</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-set">Weist einer Variable in der Datenbank einen Wert zu. Der Wert dieser Variable ist dauerhaft in der Datenbank gespeichert. Die Variable kann einen beliebigen Namen und Wert haben, im Beispiel heisst die Variable x und bekommt den Wert 10 zugewiesen. </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-variable-name2">Variablenname2</p> = <p class="purple">DB</p>.<p class="purple" data-translate="info-variable-name">Variablenname</p></div>
+            <div class="cell" data-title="Beispiel">y = my_db.x</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-get">Liest den Wert der Variable aus der Datenbank und weist ihn der zweiten Variable zu. Die Variablen können einen beliebigen Namen haben, im Beispiel heisst die Variable aus der Datenbank x und die zweite Variable y. </div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple">DB</p>.getTables()</div>
+            <div class="cell" data-title="Beispiel">print(my_db.getTables())</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-getTables">Gibt die Liste aller Tabellen in der Datenbank an.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple">DB</p>.getVariables()</div>
+            <div class="cell" data-title="Beispiel">print(my_db.getVariables())</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-getVariables">Gibt die Liste aller Variablen in der Datenbank an.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p> = Table(<p class="purple" data-translate="info-column">"Spalte1"</p>, ...)</div>
+            <div class="cell" data-title="Beispiel">students = Table("<p data-translate="info-name">Name</p>", "<p data-translate="info-age">Alter</p>") <br/>
+                my_db.students = Table("<p data-translate="info-name">Name</p>", "<p data-translate="info-age">Alter</p>")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table">Erzeugt eine leere Tabelle mit den angegebenen Spalten und speichert sie in der angegebenen Variable. Tipp: Die Tabelle kann auch dauerhaft in eine Variable aus der Datenbank gespeichert werden.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple">DB</p>.removeTable("<p class="purple" data-translate="info-table">tabelle</p>")</div>
+            <div class="cell" data-title="Beispiel">my_db.removeTable("students")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-database-removeTable">Entfernt die Tabelle mit dem angegebenen Namen aus der Datenbank.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p>.append(<p class="purple" data-translate="info-record">eintrag</p>)</div>
+            <div class="cell" data-title="Beispiel">students.append("Anna", 13)
+                my_db.students.append("Anna", 13)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-append">F&uuml;gt einen neuen Eintrag zur Tabelle hinzu.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p>.remove(<p class="purple" data-translate="info-record">eintrag</p>)</div>
+            <div class="cell" data-title="Beispiel">students.remove("Anna", 13)
+                my_db.students.remove("Anna", 13)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-remove">Entfernt den angegebenen Eintrag aus der Tabelle.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p>.addColumn("<p class="purple" data-translate="info-column-name">Spaltenname</p>")</div>
+            <div class="cell" data-title="Beispiel">students.addColumn("<p data-translate="info-grades">Noten</p>")
+                my_db.students.addColumn("<p data-translate="info-grades">Noten</p>")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-addColumn">F&uuml;gt eine neue Spalte zur Tabelle hinzu.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p>.removeColumn("<p class="purple" data-translate="info-column-name">Spaltenname</p>")</div>
+            <div class="cell" data-title="Beispiel">students.removeColumn("<p data-translate="info-grades">Noten</p>")
+                my_db.students.removeColumn("<p data-translate="info-grades">Noten</p>")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-removeColumn">Entfernt die Spalte mit dem angegebenen Namen aus der Tabelle.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-table">tabelle</p>.renameColumn("<p class="purple" data-translate="info-column-name-old">SpaltennameAlt</p>", "<p class="purple" data-translate="info-column-name-new">SpaltennameNeu</p>")</div>
+            <div class="cell" data-title="Beispiel">students.renameColumn("<p data-translate="info-name">Name</p>", "<p data-translate="info-first-name">Vorname</p>")
+                my_db.students.renameColumn("<p data-translate="info-name">Name</p>", "<p data-translate="info-first-name">Vorname</p>")</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-renameColumn">Bennent die Spalte mit dem angegebenen Namen mit dem neuen Namen um.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">len(<p class="purple" data-translate="info-table">tabelle</p>)</div>
+            <div class="cell" data-title="Beispiel">print(len(students)) <br/>
+                print(len(my_db.students))</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-length">Gibt die Anzahl der Eintr&auml;ge in der Tabelle an.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl">
+                <p class="blue">for</p>
+                <p class="purple" data-translate="info-record">eintrag</p> <p class="blue">in</p> <p class="purple" data-translate="info-table">tabelle</p>:
+                <p class="nl" data-translate="info-body">K&ouml;rper</p>
+            </div>
+            <div class="cell" data-title="Beispiel"></div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-iterator">Durchl&auml;uft jeden Eintrag in der Tabelle und f&uuml;hrt den K&ouml;rper f&uuml;r jeden Eintrag genau einmal aus.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="purple" data-translate="info-record">eintrag</p>[<p class="purple" data-translate="info-column-name">"Spaltenname"</p>]</div>
+            <div class="cell" data-title="Beispiel">for s in my_db.students: <br/>
+                &emsp;s["<p data-translate="info-age">Alter</p>"] = s["<p data-translate="info-age">Alter</p>"] + 1</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-record-access">Spricht innerhalb einer for-Schleife einzelne Felder eines Eintrags an.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="blue">print</p>(<p class="purple" data-translate="info-table">tabelle</p>.tableInfo())</div>
+            <div class="cell" data-title="Beispiel">print(students.tableInfo()) <br/> print(my_db.students.tableInfo())</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-tableInfo">Gibt den Namen der Tabelle, die Anzahl der Eintr&auml;ge in der Tabelle, die Anzahl der Spalten in der Tabelle und die Liste der Spalten in der Tabelle an.</div>
+        </div>
+
+        <div class="row">
+            <div class="cell" data-title="Befehl"><p class="blue">print</p>(<p class="purple" data-translate="info-table">tabelle</p>)</div>
+            <div class="cell" data-title="Beispiel">print(students) <br/> print(my_db.students)</div>
+            <div class="cell" data-title="Beschreibung" data-translate="info-description-table-print">Gibt die Eintr&auml;ge in der Tabelle an.</div>
+        </div>
+    </div>
+</div>
+
+
+<h3 data-translate="info-contact"><strong>Kontakt</strong></h3>
+<p data-translate="info-contact-descr">R&uuml;ckmeldungen und W&uuml;nsche zur Programmierumgebung bitte an folgende E-Mail-Adresse senden: web (at) tigerjython.ch </p>
+<br><p>Rückmeldungen und Wünsche zur Cloud-Adaption bitte an folgende E-Mail-Adresse senden: web (at) temper.li</p><h3><strong>Credits</strong></h3>
+<ul>
+    <li><strong>TigerJython-Parser:&nbsp;</strong>Tobias Kohn <a href="https://tobiaskohn.ch/" target="_blank" rel="noopener">https://tobiaskohn.ch/</a></li>
+    <li><strong>Ace Editor:&nbsp;</strong><a href="https://ace.c9.io/" target="_blank" rel="noopener">https://ace.c9.io/</a>&nbsp;(BSD <p data-translate="info-license">Lizenz</p>)</li>
+    <li><strong>Skulpt:&nbsp;</strong><a href="http://www.skulpt.org/" target="_blank" rel="noopener">http://www.skulpt.org/</a>&nbsp;(MIT <p data-translate="info-license">Lizenz</p>)</li>
+    <li><strong>FileSaver.js: </strong>Eli Grey (MIT <p data-translate="info-license">Lizenz</p>)</li>
+    <li><strong>Split.js:&nbsp;</strong>Nathan Cahill (MIT <p data-translate="info-license">Lizenz</p>)</li>
+    <li><strong>Icons:</strong>&nbsp;Tobias Kohn,&nbsp;<a href="https://www.flaticon.com/" target="_blank" rel="noopener">https://www.flaticon.com/</a>&nbsp;<p data-translate="info-authors">Autoren:</p>
+        Chanut, Freepik, Google, Smashicons
+    </li>
+    <li><strong>floodfill.js:</strong> <a href="https://github.com/binarymax/floodfill.js/" target="_blank" rel="noopener">https://github.com/binarymax/floodfill.js/</a> (MIT <p data-translate="info-license">Lizenz</p>) </li>
+    <li><strong>Materialize:</strong> <a href="https://materializecss.com/" target="_blank" rel="noopener">https://materializecss.com</a> (MIT <p data-translate="info-license">Lizenz</p>) </li>
+    <li><strong>SweetAlert2:</strong> <a href="https://sweetalert2.github.io/" target="_blank" rel="noopener">https://sweetalert2.github.io</a> (MIT <p data-translate="info-license">Lizenz</p>) </li>
+    <li><strong>Sass:</strong> <a href="https://sass-lang.com/" target="_blank" rel="noopener">https://sass-lang.com/</a> (MIT <p data-translate="info-license">Lizenz</p>) </li>
+    <!-- TODO licenses for MIT should included be here -->
+</ul>
+<h3><strong>Copyright</strong></h3>
+<p data-translate="info-copyright-descr">
+    Die Applikation wird aktiv vom ABZ der ETH Zürich und der TJGroup entwickelt. Die Benutzung der Applikation ist kostenlos, sie darf
+    jedoch nicht für kommerzielle Zwecke genutzt werden. Jede Anpassung oder Kopie der Applikation ausserhalb des
+    ausgeführten Zweckes muss schriftlich bewilligt werden.
+    <br/>
+</p>
+<p id="copyright-logos-container">
+    <a href="http://www.abz.inf.ethz.ch/" target="_blank" rel="noopener">
+        <img src="../img/abz-logo.png" id="copyright-logo-abz"></a>
+    <a href="https://www.ethz.ch" target="_blank" rel="noopener">
+        <img src="../img/ethz-logo.svg" id="copyright-logo-eth"></a>
+</p>
+
+<!-- jQuery -->
+<script type="text/javascript" src="../javascripts/jquery/jquery.min.js"></script>
+
+<!-- Load dictionary -->
+<script type="text/javascript" src="../javascripts/webtigerjython/dictionary-compiled.js" charset="utf-8"></script>
+
+<script>
+// Looks up the translations and translates the HTML text elements into the set language
+function translateStrings(dictionary) {
+    $("[data-translate]").each(function(){
+        if($(this).is("li") || $(this).is("a")){
+            // changes hover text ("title") of buttons
+            $(this).attr('title',dictionary[$(this).data("translate")])
+        } else {
+            $(this).text(dictionary[$(this).data("translate")])
+        }
+    })
+}
+translateStrings(parent.currentDict); // translates the info html page into the currently selected language
+
+</script>
+</body>

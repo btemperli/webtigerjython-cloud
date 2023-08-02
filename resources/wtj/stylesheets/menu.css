@@ -1,0 +1,213 @@
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul {
+    height: 5.5vh;
+    height: calc(var(--vh, 1vh) * 5.5);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #EEE;
+    border: 1px solid #d4d4d4;
+
+    /*Added JS 11.05.20: https://www.w3schools.com/cssref/css3_pr_user-select.asp*/
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ and Edge */
+    user-select: none; /* Standard syntax */
+}
+
+li {
+    float: left;
+}
+
+li:last-child {
+    float: right;
+}
+
+.button-container {
+    padding: 0.5vh 0.5vh 0.5vh 0.5vh;
+    border-right: 1px solid #d4d4d4;
+}
+
+.button-container:first-child {
+    border-left: 1px solid #d4d4d4;
+}
+
+.button-container:hover {
+    background-color: #dedede;
+    cursor: pointer;
+}
+
+.button-container:active {
+    background-color: #cbcbcb;
+}
+
+.img {
+    height: 4vh;
+    width: 4vh;
+}
+
+#logo-name {
+    font-size: 4vh;
+    font-weight: bold;
+    bold: true;
+    color: #000000;
+    margin-right: 2vh;
+    margin-left: 0.5vh;
+}
+
+#logo-img {
+    padding: 0.5vh 0.5vh 0.5vh 0.5vh;
+}
+
+li.dropdown:hover div{
+    right: 0; /* makes the drop down menu right-aligned*/
+}
+
+.dropdown-container {
+    diplay: block;
+    padding: 6px 3px 3px 6px;
+}
+
+.dropdown-container-lang {
+    padding: 6px 3px 3px 16px;
+}
+
+.option-img {
+    height: 3vh;
+    width: 3vh;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #EEE;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9; /* sit behind the modal canvas */
+    margin-top: -3px; /* closes the gap between the drop down menu and the menu button */
+}
+
+.dropdown-content p{
+    color: black;
+    margin: 0px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 3vh;
+}
+
+.dropdown-content div:hover {
+    background-color: #dedede
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+}
+
+.toggle {
+    position: relative;
+    float: right;
+    margin-right: 0.5vh;
+    display: inline-block;
+    width: 6vh;
+    height: 3.4vh;
+}
+
+.toggle input {
+    display: none;
+}
+
+.roundbutton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #33455e;
+    display: block;
+    transition: all 0.3s;
+    border-radius: 3.9vh;
+    cursor: pointer;
+}
+
+.roundbutton:before {
+    position: absolute;
+    content: "";
+    height: 2.4vh;
+    width: 2.5vh;
+    border-radius: 100%;
+    display: block;
+    left: 0.5vh;
+    bottom: 0.5vh;
+    background-color: white;
+    transition: all 0.3s;
+}
+
+input:checked + .roundbutton {
+    background-color: #ef781f;
+}
+
+input:checked + .roundbutton:before  {
+    transform: translate(2.6vh, 0);
+}
+
+@media only screen and (max-height : 700px) {
+    ul {
+        min-height: 40px;
+    }
+
+    .button-container {
+        padding: 4px 4px 4px 4px;
+    }
+
+    #logo-img {
+        padding: 4px 4px 4px 4px;
+    }
+
+    .img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .option-img {
+        height: 20px;
+        width: 20px;
+    }
+
+    #logo-name {
+        font-size: 30px;
+        margin-right: 10px;
+        margin-left: 4px;
+    }
+
+    .dropdown-content p{
+        font-size: 20px;
+    }
+
+    .toggle {
+        margin-right: 3.75px;
+        width: 45px;
+        height: 25.5px;
+    }
+
+    .roundbutton {
+        border-radius: 29.25px;
+    }
+
+    .roundbutton:before {
+        height: 18px;
+        width: 18.54px;
+        left: 3.75px;
+        bottom: 3.75px;
+    }
+
+    input:checked + .roundbutton:before  {
+        transform: translate(19.5px, 0);
+    }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "wtj.temperli.io",
+  "version": "1.0.0",
+  "description": "Webtigerjython cloud by beat temperli",
+  "scripts": {
+    "update": "node npm_run/wtj-update.js && node npm_run/wtj-copy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btemperli/webtigerjython-cloud.git"
+  },
+  "author": "beat temperli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btemperli/webtigerjython-cloud/issues"
+  },
+  "homepage": "https://wtj.temperli.io",
+  "dependencies": {
+    "diff-match-patch": "^1.0.5"
+  },
+  "devDependencies": {
+    "axios": "^1.4.0",
+    "copy": "^0.3.2",
+    "jsdom": "^22.1.0",
+    "stylelint": "^13.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-rscss": "^0.4.0"
+  }
+}

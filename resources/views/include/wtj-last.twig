@@ -1,0 +1,28 @@
+<script>
+    // handle here all the changes on the editor itself
+
+    function setCodeMarkings(markings) {
+        const Range = ace.require('ace/range').Range;
+
+        for (let i = 0; i < markings.length; i++) {
+            const r = new Range(markings[i][0], markings[i][1], markings[i][2], markings[i][3]);
+            editor.selection.setRange(r);
+            const markerId = editor.session.addMarker(r, "ace-new-code", "text", true);
+        }
+        // set Marker to the end of the code.
+        editor.selection.setRange(new Range(0, 0, 0, 0));
+    }
+
+    function afterLoadingWTJ() {
+        if (state === stateShared) {
+            window.originalCode = codeOrigin;
+        }
+
+        if (state === stateReturned) {
+            setCodeMarkings(markers);
+            editor.setReadOnly(true);
+        }
+    }
+
+    document.addEventListener( "DOMContentLoaded", afterLoadingWTJ);
+</script>

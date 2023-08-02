@@ -1,0 +1,134 @@
+<style>
+    .ace-new-code {
+        position: absolute;
+        background-color: rgba(160, 110, 30, 0.4);
+    }
+
+    #logo-name {
+        opacity: 0.5;
+    }
+
+    #logo-v2 {
+        position: absolute;
+        left: 220px;
+        top: 26px;
+        font-weight: bold;
+        font-size: 25px;
+        color: #780099;
+        text-shadow: 0 0 10px #fff;
+    }
+
+    .background-wrapper {
+        background: rgba(255, 255, 255, 0.95);
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 300;
+    }
+
+    .button-container-wrapper.-inactive {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .button-container-wrapper .button-container {
+        padding-bottom: 1.8vh;
+    }
+
+    .button-container-wrapper .button-text {
+        position: absolute;
+        top: 42px;
+        font-size: 7px;
+        text-transform: uppercase;
+        font-weight: bold;
+        width: 55px;
+        text-align: center;
+    }
+
+    .button-container-wrapper .img {
+        height: 3vh;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .background-wrapper .close-wrapper {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+
+    .background-wrapper .close-wrapper img {
+        width: 40px;
+    }
+
+    .wrapper-content {
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        background: whitesmoke;
+        transform: translateX(-150px) translateY(-142px);
+        position: absolute;
+    }
+
+    .wrapper-content form {
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Login Form */
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid darkgreen;
+        background-color: rgb(218, 244, 213);
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .submit {
+        padding: 10px 20px;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .submit:hover {
+        background-color: darkolivegreen;
+    }
+    .wrapper-content form.-fail .input-field {
+        border-color: darkred;
+        background-color: #e1bee7;
+    }
+
+    .wrapper-content form.-fail .submit {
+        background-color: darkred;
+    }
+
+
+    .loader {
+        border: 10px solid rgb(218, 244, 213);
+        border-radius: 50%;
+        border-top: 10px solid darkgreen;
+        width: 100px;
+        height: 100px;
+        animation: spinner 2s linear infinite;
+        margin: 100px;
+    }
+
+    @keyframes spinner {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+
+</style>

@@ -1,0 +1,295 @@
+<div id="share-wtj" class="wrapper hidden">
+    <div class="background-wrapper">
+        <div onclick="closeWrapper(this)" class="close-wrapper">
+            <img alt="close popup" src="/assets/images/icon-x.svg">
+        </div>
+        <div class="wrapper-content">
+            <div class="loader hidden" id="share-loader"></div>
+            <form class="form hidden" action="javascript:void(0)">
+                <input type="text" id="share-wtj-url" class="input-field">
+                <button class="submit" id="share-wtj-copy">Kopieren</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/js/diff-match-patch.js"></script>
+
+<script>
+    // const { diff, diff_match_patch } = require('diff-match-patch');
+
+    function ownStringify(str) {
+        const jsonString = JSON.stringify(str);
+        return jsonString.replace(/[\n\r]/g, '\\$&');
+    }
+
+    function ownParse(jsonString) {
+        jsonString = jsonString.replace(/\\&quot;/g, '\"');
+        jsonString = jsonString.replace(/&quot;/g, '\"');
+        jsonString = jsonString.replace(/&#039;/g, '\'');
+        jsonString = jsonString.replace(/&lt;/g, '<');
+        jsonString = jsonString.replace(/&gt;/g, '>');
+        jsonString = jsonString.slice(1, -1);
+        jsonString.replace(/\\([nr])/g, function(_, match) {
+            if (match === 'n') return '\n';
+            if (match === 'r') return '\r';
+            return match;
+        });
+        return jsonString;
+    }
+
+    // empty file.
+    let stateNew = 'STATE_NEW';
+    // existing code was shared.
+    let stateShared = 'STATE_SHARED';
+    // existing code with some changes was returned.
+    let stateReturned = 'STATE_RETURNED';
+
+    // todo: set correct states!
+    let state = stateNew;
+    let codeOrigin = "";
+    let shareId = '';
+    let markers = [];
+
+    {% if code %}
+    codeOrigin = ownParse('{{ code }}');
+    state = stateShared;
+    {% endif %}
+
+    {% if share_id %}
+    shareId = "{{ share_id }}";
+    {% endif %}
+
+    {% if return %}
+    state = stateReturned;
+    {% endif %}
+
+    {% if markers %}
+    markers = [
+        {% for marker in markers %}
+        [
+            {% for e in marker %}
+            {{ e }},
+            {% endfor %}
+        ],
+        {% endfor %}
+    ];
+    {% endif %}
+
+    const $shareWrapper = document.getElementById('share-wtj');
+    const $shareLoader = document.getElementById('share-loader');
+
+    function closeWrapper(event) {
+        const par = event.parentNode.parentNode;
+        if (par) {
+            par.classList.add('hidden');
+        }
+    }
+
+    function shareSuccess(shareUrl) {
+        const shareUrlBox = document.getElementById('share-wtj-url');
+        const copyButton = document.getElementById('share-wtj-copy');
+        const shareForm = $shareWrapper.querySelector('form');
+
+        window.history.pushState({}, '', shareUrl);
+        shareUrlBox.value = shareUrl;
+        $shareLoader.classList.add('hidden');
+        shareForm.classList.remove('hidden');
+
+        copyButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            shareUrlBox.select();
+            document.execCommand('copy');
+        });
+    }
+
+    function shareFailure() {
+        const shareUrlBox = document.getElementById('share-wtj-url');
+        shareUrlBox.value = "Fehler! Try Again...";
+        const shareForm = $shareWrapper.querySelector('form');
+        $shareLoader.classList.add('hidden');
+        shareForm.classList.remove('hidden');
+        shareForm.classList.add('-fail');
+    }
+
+    function getUrl() {
+        let addon = '';
+        if (window.location.pathname.startsWith('/web')) {
+            addon = '/web';
+        }
+        return `${window.location.protocol}//${window.location.hostname}${addon}`;
+    }
+
+    function shareCurrentCode() {
+        const currentCode = sessionStorage.getItem("WebTJ-program");
+        $shareWrapper.classList.remove('hidden');
+        $shareLoader.classList.remove('hidden');
+        const transferableCode = ownStringify(currentCode);
+        console.log(transferableCode);
+
+        $.ajax({
+            dataType: 'json',
+            method: 'post',
+            url: getUrl() + '/wtj-share/add',
+            data: { code: transferableCode },
+            success: (data) => {
+                const url = `${getUrl()}/wtj/${data.share_id}`;
+                shareSuccess(url);
+            },
+            error: (data, status, error) => {
+                shareFailure(data, status, error);
+            }
+        });
+    }
+
+    function getTextDifferences(oldText, newText) {
+        const dmp = new diff_match_patch();
+        const diffs = dmp.diff_main(oldText, newText);
+        const addedElements = [];
+        let currentLine = 0;
+        let currentPosition = 0;
+        // console.log(diffs);
+
+        for (const diff of diffs) {
+            const operation = diff[0];
+            const text = diff[1];
+            const lines = text.split('\r\n');
+            // console.log('outside: ' + currentPosition);
+
+            if (operation === 0) { // 0: EQUAL, -1: DELETE
+                currentLine += lines.length - 1;
+                // console.log('update currentPosition ' + currentPosition + '. currentLine: ' + lines);
+                if (lines.length === 1) {
+                    currentPosition = currentPosition + lines[lines.length - 1].length;
+                } else {
+                    currentPosition = lines[lines.length - 1].length;
+                }
+            } else if (operation === 1) { // 1: INSERT
+                const lineCount = lines.length;
+                for (let i = 0; i < lineCount; i++) {
+                    // console.log('inside: ' + currentPosition);
+                    const length = lines[i].length;
+                    if (length > 0) {
+                        addedElements.push({
+                            line: currentLine,
+                            start: currentPosition,
+                            end: currentPosition + length,
+                            length: length,
+                            text: lines[i],
+                        });
+                        currentPosition = currentPosition + length;
+                    }
+                    if (lineCount > 1) {
+                        // new line
+                        currentPosition = 0;
+                        if (lines[i] !== '' || i + 1 < lineCount) {
+                            currentLine++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return addedElements;
+    }
+
+    function returnCurrentCode() {
+        const currentCode = sessionStorage.getItem("WebTJ-program");
+
+        const differences = getTextDifferences(codeOrigin, currentCode);
+        const markings = [];
+        for (const difference of differences) {
+            const marking = [difference.line, difference.start, difference.line, difference.end];
+            markings.push(marking);
+        }
+
+        setCodeMarkings(markings);
+        $shareWrapper.classList.remove('hidden');
+        $shareLoader.classList.remove('hidden');
+        const transferableCode = ownStringify(currentCode);
+
+        $.ajax({
+            dataType: 'json',
+            method: 'post',
+            url: getUrl() + '/wtj-return/add',
+            data: {
+                share_url: shareId,
+                code: transferableCode,
+                markers: markings
+            },
+            success: (data) => {
+                const url = `${getUrl()}/wtj/${data.share_id}/${data.return_id}`;
+                shareSuccess(url);
+            },
+            error: (data, status, error) => {
+                shareFailure(data, status, error);
+            }
+        });
+    }
+
+    function restart() {
+        window.location.href = getUrl() + '/wtj';
+    }
+
+    function addElementAfter(el, insertElement) {
+        if (el && el.parentNode) {
+            el.parentNode.insertBefore(insertElement, el.nextSibling);
+        }
+    }
+
+    // set python-version to 3.
+    localStorage.setItem("WebTJ-python-version", "true");
+
+    // add presaved code.
+    sessionStorage.setItem("WebTJ-program", codeOrigin);
+
+    const buttonsData = [
+        {
+            id: 'new',
+            icon: 'icon-file.svg',
+            click: restart,
+            text: 'neustart',
+            active: state === stateReturned || state === stateShared
+        },
+        {
+            id: 'return',
+            icon: 'icon-return.svg',
+            text: 'Antwort',
+            click: returnCurrentCode,
+            active: state === stateShared
+        },
+        {
+            id: 'share',
+            icon: 'icon-share.svg',
+            text: 'Teilen',
+            click: shareCurrentCode,
+            active: true
+        }
+    ];
+
+    document.addEventListener( "DOMContentLoaded", () => {
+        for (const buttonData of buttonsData) {
+            const buttonWrapper = document.createElement('li');
+            const button = document.createElement('div');
+            const buttonText = document.createElement('div');
+            const icon = document.createElement('img');
+            buttonWrapper.setAttribute('id', `${buttonData.id}-button-wrapper`);
+            buttonWrapper.classList.add('button-container-wrapper');
+            button.setAttribute('id', `${buttonData.id}-button`);
+            button.classList.add('button-container');
+            if (!buttonData.active) {
+                button.classList.add('-inactive');
+                buttonWrapper.classList.add('-inactive');
+            }
+            buttonText.classList.add('button-text');
+            buttonText.innerHTML = buttonData.text;
+            icon.setAttribute('src', `/assets/images/${buttonData.icon}`);
+            icon.classList.add('img');
+
+            addElementAfter(document.querySelector('[data-translate="stop-button-hover"]'), buttonWrapper);
+            document.getElementById(`${buttonData.id}-button-wrapper`).addEventListener('click', buttonData.click);
+            document.getElementById(`${buttonData.id}-button-wrapper`).appendChild(button);
+            document.getElementById(`${buttonData.id}-button-wrapper`).appendChild(buttonText);
+            document.getElementById(`${buttonData.id}-button`).appendChild(icon);
+        }
+    });
+</script>

@@ -1,0 +1,208 @@
+body {
+    overflow: hidden;
+    margin: 0px;
+    font-family: Arial;
+}
+
+#content {
+    height: 94.5vh;
+    height: calc(var(--vh, 1vh) * 94.5);
+    width: 100%;
+}
+
+#editor {
+    display: inline-block;
+    height: 94.5vh;
+    height: calc(var(--vh, 1vh) * 94.5);
+    background: #faf8ff;
+}
+
+#right-content {
+    overflow: hidden;
+    display: inline-block;
+    height: 94.5vh;
+    height: calc(var(--vh, 1vh) * 94.5);
+}
+
+.split {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.gutter {
+    background-color: #eeeeee;
+    background-image: url("../img/grips.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 10px;
+    border-right: 1px solid #d4d4d4;
+    border-left: 1px solid #d4d4d4;
+}
+.gutter.gutter-horizontal {
+    cursor: col-resize;
+}
+
+.ace_gutter-cell.ace_breakpoint{
+    border-radius: 20px 0px 0px 20px;
+    /* Change the color of the breakpoint if you want */
+    box-shadow: 0px 0px 1px 1px #248c46 inset;
+}
+
+.split.split-horizontal, .gutter.gutter-horizontal {
+    height: 100%;
+    float: left;
+}
+
+#mycanvas {
+    display: inline-block;
+    width: 100%;
+    height: 75%;
+    float: right;
+    background: #fdffff;
+}
+
+#output {
+    font-family: "Courier New", monospace;
+    white-space: pre;
+    height: 25%;
+    width: 100%;
+    background: rgb(247, 248, 248);
+    font-size: 20px;
+    overflow: auto;
+    border-top: 2px solid #d4d4d4;
+    position: relative;
+    z-index: 5;
+}
+
+#errorBox {
+    position: absolute;
+    z-index: 9; /* below the modal box */
+    font-size: 14px;
+    background: #ffcec2;
+    color: black;
+    border: 1px solid #b1423b;
+    padding: 2px;
+}
+
+.errorMarker{
+    position:absolute;
+    background: rgba(255, 0, 0, 0.3);
+    z-index:9 /* below the modal box */
+}
+
+.debugMarker{
+    position:absolute;
+    background: rgba(89, 255, 0, 0.3);
+    z-index:9 /* below the modal box */
+}
+
+.color-red {
+    color: #F00;
+}
+
+.color-black {
+    color: #000000;
+}
+
+.ace_gutter-layer {
+    background-color: #FFDDAA;
+    border-right: 1px solid black;
+}
+
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.scroll-wrapper {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+}
+
+.scroll-wrapper iframe {
+    display:block;
+    height: 100%;
+    width: 100%;
+    border: none;
+    overflow-y: hidden;
+}
+
+#mycanvas-modal {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    border: 3px solid #888;
+    height: 92vh;
+    height: calc(var(--vh, 1vh) * 92);
+    width: 98%;
+    z-index: 10;
+}
+
+.close {
+    background: #c5000c;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    text-align: center;
+    right: 4.5%;
+    top: 4vh;
+    top: calc(var(--vh, 1vh) * 4);
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+    z-index: 11 /* on top of the modal */;
+}
+
+.close:hover {
+    background: #ff000e;
+    cursor: pointer;
+}
+
+@media only screen and (max-height : 700px) {
+    #content {
+        height: calc(var(--vh, 1vh) * 100 - 40px); /* navigation bar has height 40px*/
+    }
+
+    #editor {
+        height: calc(var(--vh, 1vh) * 100 - 40px);
+    }
+
+    #right-content {
+        height: calc(var(--vh, 1vh) * 100 - 40px);
+    }
+}
+
+/* iPad landscape */
+@media only screen and (min-device-height : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    .scroll-wrapper {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+    }
+}
+
+/* iPad portrait */
+@media only screen and (min-device-height : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .scroll-wrapper {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+    }
+}
