@@ -331,7 +331,7 @@ function replaceStringInFile(filePath, searchString, replacementString) {
 
             // (8) favicon
             oldLinkText = '<link rel="icon" href="img/favicon.ico">';
-            newLinkText = '<link rel="icon" href="assets/images/favicon.png">';
+            newLinkText = '<link rel="icon" href="/assets/images/favicon.png">';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
             // end: update html
