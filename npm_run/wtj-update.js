@@ -335,7 +335,18 @@ function replaceStringInFile(filePath, searchString, replacementString) {
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
             // end: update html
-            htmlWTJ = htmlWTJ.replace('<body>', "{% include '../include/wtj-head.twig' %}\n<body>\n{% include '../include/wtj-first.twig' %}");
+            const googleAnalytics = "<!-- Google tag (gtag.js) -->\n" +
+                "<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-HJR10WMWYN\"></script>\n" +
+                "<script>\n" +
+                "  window.dataLayer = window.dataLayer || [];\n" +
+                "  function gtag(){dataLayer.push(arguments);}\n" +
+                "  gtag('js', new Date());\n" +
+                "\n" +
+                "  gtag('config', 'G-HJR10WMWYN');\n" +
+                "</script>";
+
+            htmlWTJ = htmlWTJ.replace('</head>', `{% include '../include/wtj-head.twig' %}\n${googleAnalytics}\n</head>`);
+            htmlWTJ = htmlWTJ.replace('<body>', "<body>\n{% include '../include/wtj-first.twig' %}");
             htmlWTJ = htmlWTJ.replace('</body>', "{% include '../include/wtj-last.twig' %}\n</body>");
         }).then(() => {
             fs.writeFile(wtjTwig, htmlWTJ, (err) => {
