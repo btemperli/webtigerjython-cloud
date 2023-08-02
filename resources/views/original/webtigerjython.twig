@@ -28,8 +28,17 @@
     <link rel="stylesheet" href="/assets/wtj/stylesheets/gpanel.css">
     <link rel="stylesheet" href="/assets/wtj/stylesheets/debugger.css">
 
-</head>
 {% include '../include/wtj-head.twig' %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJR10WMWYN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HJR10WMWYN');
+</script>
+</head>
 <body>
 {% include '../include/wtj-first.twig' %}
 <!-- Lodash cloneDeep-->
