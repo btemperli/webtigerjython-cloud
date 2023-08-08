@@ -100,15 +100,15 @@ class WtjController extends Controller
 
     public function wtj_add_return_code(Request $request) {
         if (!$request->has('share_url')) {
-            return response()->json('error');
+            return response('', 500)->json('error');
         }
 
         if (!$request->has('code')) {
-            return response()->json('error');
+            return response('', 500)->json('error');
         }
 
         if (!$request->has('markers')) {
-            return response()->json('error');
+            return response('', 500)->json('error');
         }
 
         $code = $request->get('code');
@@ -124,7 +124,7 @@ class WtjController extends Controller
         $save = WtjToken::create($entry);
 
         if (!$save) {
-            return response()->json('save: error');
+            return response('', 500)->json('save: error');
         }
 
         $results = [

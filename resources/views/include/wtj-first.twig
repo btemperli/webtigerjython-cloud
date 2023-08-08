@@ -95,6 +95,7 @@
         shareUrlBox.value = shareUrl;
         $shareLoader.classList.add('hidden');
         shareForm.classList.remove('hidden');
+        shareForm.classList.remove('-fail');
 
         copyButton.addEventListener('click', function(event) {
             event.preventDefault();
@@ -103,9 +104,9 @@
         });
     }
 
-    function shareFailure() {
+    function shareFailure(text) {
         const shareUrlBox = document.getElementById('share-wtj-url');
-        shareUrlBox.value = "Fehler! Try Again...";
+        shareUrlBox.value = text;
         const shareForm = $shareWrapper.querySelector('form');
         $shareLoader.classList.add('hidden');
         shareForm.classList.remove('hidden');
@@ -125,7 +126,7 @@
         $shareWrapper.classList.remove('hidden');
         $shareLoader.classList.remove('hidden');
         const transferableCode = ownStringify(currentCode);
-        console.log(transferableCode);
+        // console.log(transferableCode);
 
         $.ajax({
             dataType: 'json',
@@ -137,7 +138,10 @@
                 shareSuccess(url);
             },
             error: (data, status, error) => {
-                shareFailure(data, status, error);
+                console.log(data);
+                console.log(status);
+                console.log(error);
+                shareFailure("Fehler! Try Again...");
             }
         });
     }
@@ -203,6 +207,13 @@
             markings.push(marking);
         }
 
+        if (markings.length === 0) {
+            $shareWrapper.classList.remove('hidden');
+            $shareLoader.classList.remove('hidden');
+            shareFailure("Keine Änderungen gefunden");
+            return;
+        }
+
         setCodeMarkings(markings);
         $shareWrapper.classList.remove('hidden');
         $shareLoader.classList.remove('hidden');
@@ -222,7 +233,10 @@
                 shareSuccess(url);
             },
             error: (data, status, error) => {
-                shareFailure(data, status, error);
+                console.log(data);
+                console.log(status);
+                console.log(error);
+                shareFailure("Fehler! Try Again...");
             }
         });
     }
