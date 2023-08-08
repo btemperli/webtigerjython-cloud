@@ -28,6 +28,7 @@
         jsonString = jsonString.replace(/&#039;/g, '\'');
         jsonString = jsonString.replace(/&lt;/g, '<');
         jsonString = jsonString.replace(/&gt;/g, '>');
+        jsonString = jsonString.replace(/&amp;/g, '&');
         jsonString = jsonString.slice(1, -1);
         jsonString.replace(/\\([nr])/g, function(_, match) {
             if (match === 'n') return '\n';
