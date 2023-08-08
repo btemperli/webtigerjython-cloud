@@ -248,12 +248,14 @@
             icon: 'icon-file.svg',
             click: restart,
             text: 'neustart',
+            mouseover: 'Neustart mit leerem Code',
             active: state === stateReturned || state === stateShared
         },
         {
             id: 'return',
             icon: 'icon-return.svg',
             text: 'Antwort',
+            mouseover: 'Erstelle Link mit den markierten Änderungen',
             click: returnCurrentCode,
             active: state === stateShared
         },
@@ -261,6 +263,7 @@
             id: 'share',
             icon: 'icon-share.svg',
             text: 'Teilen',
+            mouseover: 'Erstelle Link zu diesem Code',
             click: shareCurrentCode,
             active: true
         }
@@ -275,6 +278,7 @@
             buttonWrapper.setAttribute('id', `${buttonData.id}-button-wrapper`);
             buttonWrapper.classList.add('button-container-wrapper');
             button.setAttribute('id', `${buttonData.id}-button`);
+            button.setAttribute('title', buttonData.mouseover);
             button.classList.add('button-container');
             if (!buttonData.active) {
                 button.classList.add('-inactive');

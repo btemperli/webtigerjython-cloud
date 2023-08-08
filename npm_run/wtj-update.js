@@ -320,16 +320,32 @@ function replaceStringInFile(filePath, searchString, replacementString) {
 
             // (6) info-box 3
             oldLinkText = '<h3><strong>Credits</strong></h3>';
-            newLinkText = '<br><p>Rückmeldungen und Wünsche zur Cloud-Adaption bitte an folgende E-Mail-Adresse senden: web (at) temper.li</p>';
+            newLinkText = '<br><p>Rückmeldungen und Wünsche zur Cloud-Adaption bitte via <a target="_blank" href="https://github.com/btemperli/webtigerjython-cloud/issues">Github-Issues</a> mitteilen.</p>';
             newLinkText += '<h3><strong>Credits</strong></h3>';
             replaceStringInFile(`${wtjFolder}/html/info.html`, oldLinkText, newLinkText);
 
-            // (7) logo
+            // (7) info-box 4
+            oldLinkText = 'entwickelt. Die Benutzung der Applikation';
+            newLinkText = 'entwickelt, die Cloud-Erweiterung stammt von Beat Temperli. Die Benutzung der Applikation';
+            replaceStringInFile(`${wtjFolder}/html/info.html`, oldLinkText, newLinkText);
+
+            // (7) info-box 5
+            oldLinkText = 'info-copyright-descr';
+            newLinkText = '';
+            replaceStringInFile(`${wtjFolder}/html/info.html`, oldLinkText, newLinkText);
+
+            // (7) info-box 6
+            oldLinkText = '<!-- TODO licenses for MIT should included be here -->';
+            newLinkText = '    <li><strong>Diff-Match-Patch:</strong> <a href="https://github.com/google/diff-match-patch" target="_blank" rel="noopener">https://github.com/google/diff-match-patch</a> (Apache License 2.0)';
+            newLinkText += '\n    <!-- TODO licenses for MIT should included be here -->';
+            replaceStringInFile(`${wtjFolder}/html/info.html`, oldLinkText, newLinkText);
+
+            // (8) logo
             oldLinkText = '<li id="logo-name">WebTigerJython</li>';
-            newLinkText = '<li id="logo-name">WebTigerJython</li><li id="logo-v2" title="Cloud-Version by Beat Temperli">CLOUD v2.0</li>';
+            newLinkText = '<li id="logo-name">WebTigerJython</li><li id="logo-v2" title="Cloud-Version by Beat Temperli">CLOUD</li>';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
-            // (8) favicon
+            // (9) favicon
             oldLinkText = '<link rel="icon" href="img/favicon.ico">';
             newLinkText = '<link rel="icon" href="/assets/images/favicon.png">';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
