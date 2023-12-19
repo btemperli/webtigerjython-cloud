@@ -350,6 +350,17 @@ function replaceStringInFile(filePath, searchString, replacementString) {
             newLinkText = '<link rel="icon" href="/assets/images/favicon.png">';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
+            // (10) better translations
+            oldLinkText = `"name '"+Sk.unfixReserved(a)+"' is not defined"`;
+            newLinkText = `"Der Name '"+Sk.unfixReserved(a)+"' ist nicht bekannt. Er wurde nicht definiert und auch nicht importiert."`;
+            replaceStringInFile(`${wtjFolder}/javascripts/skulpt/skulpt.min.js`, oldLinkText, newLinkText);
+            oldLinkText = `"cannot concatenate 'str' and '"+a+"' objects"`;
+            newLinkText = `"Objekte vom Typ 'str' können nicht mit Objekten vom Typ '"+a+"' zusammengesetzt werden."`;
+            replaceStringInFile(`${wtjFolder}/javascripts/skulpt/skulpt.min.js`, oldLinkText, newLinkText);
+            oldLinkText = `"list index out of range"`;
+            newLinkText = `"Dieser Listen-Index ist ausserhalb der Liste, die Liste hat kein Element an dieser Position."`;
+            replaceStringInFile(`${wtjFolder}/javascripts/skulpt/skulpt.min.js`, oldLinkText, newLinkText);
+
             // end: update html
             const googleAnalytics = "<!-- Google tag (gtag.js) -->\n" +
                 "<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-HJR10WMWYN\"></script>\n" +
