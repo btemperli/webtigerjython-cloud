@@ -67,6 +67,8 @@
 <script type="text/javascript" src="/assets/wtj/javascripts/split/Split.js" charset="utf-8"></script>
 <!-- PapaParse -->
 
+<!-- LZString -->
+<script type="text/javascript" src="/assets/wtj/javascripts/lz-string/lz-string.min.js" charset="utf-8"></script>
 
 <!-- WebTigerJython -->
 <script type="text/javascript" src="/assets/wtj/javascripts/webtigerjython/functions-compiled.js" charset="utf-8"></script>
@@ -130,79 +132,84 @@
         </div>
     </li>
 
-    <li class="dropdown">
-        <div class="button-container">
-            <img class="img" src="/assets/wtj/img/menu.png">
-        </div>
-        <div class="dropdown-content">
-            <div id="language-button" class="dropdown-container" onclick="openLanguageSwitcher()">
-                <img id="language-image" class="option-img" src="/assets/wtj/img/langDE.png">
-                <p id="language-text" data-translate="options-current-language">Deutsch</p>
-                <div id="language-switch" style="display: none;">
-                    <div class="dropdown-container-lang" onclick="setDE()">
-                        <img class="option-img" src="/assets/wtj/img/langDE.png">
-                        <p>Deutsch</p>
-                    </div>
-                    <div class="dropdown-container-lang" onclick="setFR()">
-                        <img class="option-img" src="/assets/wtj/img/langFR.png">
-                        <p>Français</p>
-                    </div>
-                    <div class="dropdown-container-lang" onclick="setIT()">
-                        <img class="option-img" src="/assets/wtj/img/langIT.png">
-                        <p>Italiano</p>
-                    </div>
-                    <div class="dropdown-container-lang" onclick="setEN()">
-                        <img class="option-img" src="/assets/wtj/img/langEN.png">
-                        <p>English</p>
-                    </div>
-                    <div class="dropdown-container-lang" onclick="setRU()">
-                        <img class="option-img" src="/assets/wtj/img/langRU.png">
-                        <p>Русский</p>
+    <div style="float: right;">
+          
+
+        <li class="dropdown">
+            <div class="button-container">
+                <img class="img" src="/assets/wtj/img/menu.png">
+            </div>
+            <div class="dropdown-content">
+                <div id="language-button" class="dropdown-container" onclick="openLanguageSwitcher()">
+                    <img id="language-image" class="option-img" src="/assets/wtj/img/langDE.png">
+                    <p id="language-text" data-translate="options-current-language">Deutsch</p>
+                    <div id="language-switch" style="display: none;">
+                        <div class="dropdown-container-lang" onclick="setDE()">
+                            <img class="option-img" src="/assets/wtj/img/langDE.png">
+                            <p>Deutsch</p>
+                        </div>
+                        <div class="dropdown-container-lang" onclick="setFR()">
+                            <img class="option-img" src="/assets/wtj/img/langFR.png">
+                            <p>Français</p>
+                        </div>
+                        <div class="dropdown-container-lang" onclick="setIT()">
+                            <img class="option-img" src="/assets/wtj/img/langIT.png">
+                            <p>Italiano</p>
+                        </div>
+                        <div class="dropdown-container-lang" onclick="setEN()">
+                            <img class="option-img" src="/assets/wtj/img/langEN.png">
+                            <p>English</p>
+                        </div>
+                        <div class="dropdown-container-lang" onclick="setRU()">
+                            <img class="option-img" src="/assets/wtj/img/langRU.png">
+                            <p>Русский</p>
+                        </div>
                     </div>
                 </div>
+                <div id="fullscreen-button" class="dropdown-container" onclick="toggleFullScreen()">
+                    <img id="fullscreen-image" class="option-img" src="/assets/wtj/img/expand.png">
+                    <p id="fullscreen-text" data-translate="options-fullscreen">Vollbild</p>
+                </div>
+                <div id="python-version-button" class="dropdown-container">
+                    <img id="python-version-image" class="option-img" src="/assets/wtj/img/python.png">
+                    <p id="python-version-text">Python 3</p>
+                    <label class="toggle"> <input id="toggleswitch" type="checkbox"> <span class="roundbutton"></span>
+                    </label>
+                </div>
+                <div id="debug-mode-button" class="dropdown-container">
+                    <img id="debug-mode-image" class="option-img" src="/assets/wtj/img/debug-button.svg">
+                    <p data-translate="options-debug">Debug</p>
+                    <label class="toggle"> <input id="debugswitch" type="checkbox"> <span class="roundbutton"></span>
+                    </label>
+                </div>
+                <div id="save-image-button" class="dropdown-container">
+                    <img class="option-img" src="/assets/wtj/img/photo.png">
+                    <p data-translate="options-image-save">Bild speichern</p>
+                </div>
+                <div id="save-button" class="dropdown-container">
+                    <img class="option-img" src="/assets/wtj/img/save.png">
+                    <p data-translate="options-program-save">Programm speichern</p>
+                </div>
+                <div id="load-button" class="dropdown-container">
+                    <img class="option-img" src="/assets/wtj/img/open.png">
+                    <p data-translate="options-program-load">Programm öffnen</p>
+                </div>
+                <div id="export-db-button" class="dropdown-container">
+                    <img class="option-img" src="/assets/wtj/img/save.png">
+                    <p data-translate="options-export-db-table">Datenbank Exportieren</p>
+                </div>
+                <div id="import-db-button" class="dropdown-container">
+                    <img class="option-img" src="/assets/wtj/img/open.png">
+                    <p data-translate="options-import-db-table">Datenbank Importieren</p>
+                </div>
+                <div id="info-button" class="dropdown-container" onclick="openInformation()">
+                    <img class="option-img" src="/assets/wtj/img/info.png">
+                    <p data-translate="options-information">Informationen</p>
+                </div>
             </div>
-            <div id="fullscreen-button" class="dropdown-container" onclick="toggleFullScreen()">
-                <img id="fullscreen-image" class="option-img" src="/assets/wtj/img/expand.png">
-                <p id="fullscreen-text" data-translate="options-fullscreen">Vollbild</p>
-            </div>
-            <div id="python-version-button" class="dropdown-container">
-                <img id="python-version-image" class="option-img" src="/assets/wtj/img/python.png">
-                <p id="python-version-text">Python 3</p>
-                <label class="toggle"> <input id="toggleswitch" type="checkbox"> <span class="roundbutton"></span>
-                </label>
-            </div>
-            <div id="debug-mode-button" class="dropdown-container">
-                <img id="debug-mode-image" class="option-img" src="/assets/wtj/img/debug-button.svg">
-                <p data-translate="options-debug">Debug</p>
-                <label class="toggle"> <input id="debugswitch" type="checkbox"> <span class="roundbutton"></span>
-                </label>
-            </div>
-            <div id="save-image-button" class="dropdown-container">
-                <img class="option-img" src="/assets/wtj/img/photo.png">
-                <p data-translate="options-image-save">Bild speichern</p>
-            </div>
-            <div id="save-button" class="dropdown-container">
-                <img class="option-img" src="/assets/wtj/img/save.png">
-                <p data-translate="options-program-save">Programm speichern</p>
-            </div>
-            <div id="load-button" class="dropdown-container">
-                <img class="option-img" src="/assets/wtj/img/open.png">
-                <p data-translate="options-program-load">Programm öffnen</p>
-            </div>
-            <div id="export-db-button" class="dropdown-container">
-                <img class="option-img" src="/assets/wtj/img/save.png">
-                <p data-translate="options-export-db-table">Datenbank Exportieren</p>
-            </div>
-            <div id="import-db-button" class="dropdown-container">
-                <img class="option-img" src="/assets/wtj/img/open.png">
-                <p data-translate="options-import-db-table">Datenbank Importieren</p>
-            </div>
-            <div id="info-button" class="dropdown-container" onclick="openInformation()">
-                <img class="option-img" src="/assets/wtj/img/info.png">
-                <p data-translate="options-information">Informationen</p>
-            </div>
-        </div>
-    </li>
+        </li>
+    </div>
+
 </ul>
 
 <!-- Editor, Canvas and Output -->
@@ -240,6 +247,19 @@
             errorMsg = dictionary.it["error-msg-ie"];
         }
         document.getElementsByTagName('body')[0].innerHTML = errorMsg;
+    }
+
+    function openTigerPython(){
+        // https://github.com/joaquimserafim/base64-url/blob/master/index.js
+        function escape (str) {
+            return str.replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '')
+        }
+        let prog = editor.getValue();
+        code = [{name: "main.py",data: prog},];
+        code_arg = escape(LZString.compressToBase64(JSON.stringify(code)));
+        window.open('https\:\/\/webtigerpython.ethz.ch/?code=' + code_arg);
     }
 
 </script>

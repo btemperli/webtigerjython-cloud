@@ -2,6 +2,18 @@
 
 [wtj.temperli.io](https://wtj.temperli.io)
 
+## Setup
+
+1. Install all required libraries:
+
+    $ npm install
+    $ composer install
+
+2. Prepare a MySQL/Maria-Database.
+3. Copy `.env.example` in a new `.env`-File, add all required information.
+4. Fill up your Database: `$ php artisan migrate`
+
+
 ## Cloud-Adaption
 
 - Save TigerJython-Code directly on the server
@@ -15,7 +27,7 @@
 
 In the background, this adaptation is based on the original version from the [ABZ](https://abz.inf.ethz.ch/) at the ETH [webtigerjython.ethz.ch/](https://webtigerjython.ethz.ch/).
 
-    $ npm run wtj-update
+    $ npm run update
 
 Run the command to update the original source of webtigerjython directly from the original source.
 

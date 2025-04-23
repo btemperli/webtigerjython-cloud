@@ -15,6 +15,7 @@
 
 // WebTigerJython
 $router->get('/', 'WtjController@wtj');
+$router->get('/wtj-admin', 'WtjController@admin');
 $router->get('/{share_id}', 'WtjController@wtj_get_code');
 $router->get('/{share_id}/{return_id}', 'WtjController@wtj_get_return_code');
 //$router->post('/wtj-login', 'WtjController@wtj_login');

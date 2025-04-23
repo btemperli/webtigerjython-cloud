@@ -24,10 +24,6 @@ li {
     float: left;
 }
 
-li:last-child {
-    float: right;
-}
-
 .button-container {
     padding: 0.5vh 0.5vh 0.5vh 0.5vh;
     border-right: 1px solid #d4d4d4;

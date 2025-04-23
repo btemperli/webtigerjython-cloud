@@ -350,6 +350,11 @@ function replaceStringInFile(filePath, searchString, replacementString) {
             newLinkText = '<link rel="icon" href="/assets/images/favicon.png">';
             htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
 
+            // (10) webtigerpython
+            oldLinkText = /<li onclick="openTigerPython\(\)".*?<\/li>/s;
+            newLinkText = '';
+            htmlWTJ = htmlWTJ.replace(oldLinkText, newLinkText);
+
             // (10) better translations
             oldLinkText = `"name '"+Sk.unfixReserved(a)+"' is not defined"`;
             newLinkText = `"Der Name '"+Sk.unfixReserved(a)+"' ist nicht bekannt. Er wurde nicht definiert und auch nicht importiert."`;

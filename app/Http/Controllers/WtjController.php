@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\WtjToken;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class WtjController extends Controller
 {
@@ -170,6 +171,24 @@ class WtjController extends Controller
         ];
 
         return view('original/webtigerjython', $parameter);
+    }
+
+    public function admin(Request $request) {
+        $correctPassword = $_ENV['ADMIN_LOG_PASSWORD'] ?? null;
+        $inputPassword = $request->query->get('pw');
+
+        if (!$correctPassword || $inputPassword !== $correctPassword) {
+            return new Response('Zugriff verweigert: Ungültiges Passwort.', Response::HTTP_FORBIDDEN);
+        }
+
+        $tokens = WtjToken::select('wtj_token', 'wtj_return_token', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin', [
+            'tokens' => $tokens,
+            'count' => sizeof($tokens),
+        ]);
     }
 
     public function wtj()

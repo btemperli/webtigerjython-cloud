@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .table-sm td, .table-sm th {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}{{ count }} Codes{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">{{ count }} Codes</h1>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered table-hover table-striped align-middle">
+            <thead class="table-light">
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Antwort</th>
+                <th scope="col">Erstellt am</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for token in tokens %}
+                <tr>
+                    <td><a href="/{{ token.wtj_token }}">{{ token.wtj_token }}</a></td>
+                    <td>
+                        {% if token.wtj_return_token %}
+                            <a href="/{{ token.wtj_token }}/{{ token.wtj_return_token }}">{{ token.wtj_token }}/{{ token.wtj_return_token }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ token.created_at|date('d.m.Y H:i') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">Keine Tokens gefunden.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
