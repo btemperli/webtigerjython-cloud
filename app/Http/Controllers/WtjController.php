@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Uuid;
+use App\Model\Visits;
 use App\Model\WtjToken;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -34,6 +36,41 @@ class WtjController extends Controller
 
     private function stringToArray($string) {
         return unserialize($string);
+    }
+
+    /**
+     * Generate a Hashed Access Code to check, if the requests are valid
+     *
+     * @return string hashed Value in the form
+     * xxxxxxxxxxxxxx==.123456789abcdef123456789abcdef123456789abcdef123456789abcdef1234
+     */
+    private function generateHashedAccessCode(): string
+    {
+        $secret = $_ENV['ACCESS_CODE'];
+        $timestamp = time();
+        $signature = hash_hmac('sha256', (string)$timestamp, $secret);
+        $code = base64_encode($timestamp) . '.' . $signature;
+        return $code;
+    }
+
+    private function validateHashedAccessCode(string $code): bool
+    {
+        $secret = $_ENV['ACCESS_CODE'];
+
+        [$encodedTime, $providedHash] = explode('.', $code);
+        $timestamp = (int)base64_decode($encodedTime);
+        $expectedHash = hash_hmac('sha256', (string)$timestamp, $secret);
+
+        if (!hash_equals($expectedHash, $providedHash)) {
+            return false;
+        }
+
+        // check time: 48h = 172800s
+        if ((time() - $timestamp) > 172800) {
+            return false;
+        }
+
+        return true;
     }
 
     private function loadCode($share_id, $return_id = null) {
@@ -78,7 +115,28 @@ class WtjController extends Controller
      */
     public function wtj_add_code(Request $request) {
         if (!$request->has('code')) {
-            return response()->json('error');
+            return response()->json('error', 500);
+        }
+
+        if (!$request->has('access')) {
+            return response()->json('error', 500);
+        }
+
+        if (!$request->has('uuid')) {
+            return response()->json('error', 500);
+        }
+
+        $uuid = $request->get('uuid');
+        $access = $request->get('access');
+        if (!$uuid && $access) {
+            if (!$this->validateHashedAccessCode($access)) {
+                return response()->json('error', 401);
+            }
+            $uuid = Uuid::createFromRequest($request);
+        } else {
+            if (!Uuid::checkUuid($uuid)) {
+                return response()->json('error');
+            }
         }
 
         $code = $request->get('code');
@@ -88,14 +146,19 @@ class WtjController extends Controller
             'wtj_code' => $code,
             'wtj_token' => $randomToken,
         ];
-
         $save = WtjToken::create($entry);
 
         if (!$save) {
             return response()->json('save: error');
         }
 
-        $results = ['share_id' => $randomToken];
+        // save uuid as creator
+        Visits::addCreator($randomToken, $uuid);
+
+        $results = [
+            'share_id' => $randomToken,
+            'uuid' => $uuid,
+        ];
         return response()->json($results);
     }
 
@@ -191,6 +254,9 @@ class WtjController extends Controller
 
     public function wtj()
     {
-        return view('original/webtigerjython');
+        $hashedAccessCode = $this->generateHashedAccessCode();
+        return view('original/webtigerjython', [
+            'hashed_access_code' => $hashedAccessCode,
+        ]);
     }
 }

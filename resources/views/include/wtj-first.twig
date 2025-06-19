@@ -50,6 +50,12 @@
     let codeOrigin = "";
     let shareId = '';
     let markers = [];
+    let hashedAccessCode = '';
+    let uuid = getUuidFromBrowser();
+
+    {% if hashed_access_code %}
+    hashedAccessCode = '{{ hashed_access_code }}'
+    {% endif %}
 
     {% if code %}
     codeOrigin = ownParse('{{ code }}');
@@ -113,6 +119,23 @@
         shareForm.classList.add('-fail');
     }
 
+    function saveUuidToBrowser(uuid_raw) {
+        uuid = uuid_raw;
+        localStorage.setItem('user_uuid', uuid);
+        console.log(uuid);
+    }
+
+    function getUuidFromBrowser() {
+        const uuid = localStorage.getItem('user_uuid');
+
+        if (uuid === null) {
+            console.log('Es wurde noch keine UUID gespeichert.');
+            return ''
+        }
+
+        return uuid;
+    }
+
     function getUrl() {
         let addon = '';
         if (window.location.pathname.startsWith('/web')) {
@@ -126,15 +149,22 @@
         $shareWrapper.classList.remove('hidden');
         $shareLoader.classList.remove('hidden');
         const transferableCode = ownStringify(currentCode);
-        // console.log(transferableCode);
+        console.log(hashedAccessCode);
 
         $.ajax({
             dataType: 'json',
             method: 'post',
             url: getUrl() + '/wtj-share/add',
-            data: { code: transferableCode },
+            data: {
+                code: transferableCode,
+                access: hashedAccessCode,
+                uuid: uuid
+            },
             success: (data) => {
+                const uuid = data.uuid;
                 const url = `${getUrl()}/${data.share_id}`;
+
+                saveUuidToBrowser(uuid);
                 shareSuccess(url);
             },
             error: (data, status, error) => {
