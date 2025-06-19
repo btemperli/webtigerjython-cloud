@@ -139,7 +139,7 @@ class WtjController extends Controller
         $loadCode = $this->loadCode($share_id);
 
         if ($loadCode === 404) {
-            return response($share_id . " not found.", 404);
+            return response("<h1>Code nicht gefunden</h1><br>Der Code <b>$share_id</b> existiert nicht im System.", 404);
         }
 
         $parameter = [
@@ -152,13 +152,11 @@ class WtjController extends Controller
     }
 
     public function wtj_get_return_code(Request $request, $share_id, $return_id) {
-        $code = '\"# This is my presaved code...\\r\\n\\r\\ndef helloWorld():\\r\\n    print(\\\"hello world\\\")\\r\\n    \\r\\nhelloWorld()\"';
-        // todo: get code from the database.
-
         $loadCode = $this->loadCode($share_id, $return_id);
 
         if ($loadCode === 404) {
-            return response($share_id . "/". $return_id . " not found.", 404);
+            return response("<h1>Code nicht gefunden</h1><br>Der Code <b>$share_id/$return_id</b> existiert nicht im System.", 404);
+
         }
         $markers = $this->stringToArray($loadCode['entry_raw']['wtj_marker']);
 
