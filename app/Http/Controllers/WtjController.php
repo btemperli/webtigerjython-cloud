@@ -219,8 +219,8 @@ class WtjController extends Controller
 
         if ($loadCode === 404) {
             return response("<h1>Code nicht gefunden</h1><br>Der Code <b>$share_id/$return_id</b> existiert nicht im System.", 404);
-
         }
+
         $markers = $this->stringToArray($loadCode['entry_raw']['wtj_marker']);
 
         $parameter = [
