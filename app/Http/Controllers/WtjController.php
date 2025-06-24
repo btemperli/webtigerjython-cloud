@@ -96,6 +96,19 @@ class WtjController extends Controller
         ];
     }
 
+    private function validateRequestFields(Request $request, array $requiredFields)
+    {
+        foreach ($requiredFields as $field) {
+            if (!$request->has($field)) {
+                return response()->json([
+                    'error' => "error: $field"
+                ], 500);
+            }
+        }
+
+        return null; // alles ok
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -114,16 +127,9 @@ class WtjController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function wtj_add_code(Request $request) {
-        if (!$request->has('code')) {
-            return response()->json('error', 500);
-        }
-
-        if (!$request->has('access')) {
-            return response()->json('error', 500);
-        }
-
-        if (!$request->has('uuid')) {
-            return response()->json('error', 500);
+        $check = $this->validateRequestFields($request, ['code', 'access', 'uuid']);
+        if ($check) {
+            return $check;
         }
 
         $uuid = $request->get('uuid');
@@ -163,16 +169,9 @@ class WtjController extends Controller
     }
 
     public function wtj_add_return_code(Request $request) {
-        if (!$request->has('share_url')) {
-            return response('', 500)->json('error');
-        }
-
-        if (!$request->has('code')) {
-            return response('', 500)->json('error');
-        }
-
-        if (!$request->has('markers')) {
-            return response('', 500)->json('error');
+        $check = $this->validateRequestFields($request, ['share_url', 'code', 'markers']);
+        if ($check) {
+            return $check;
         }
 
         $code = $request->get('code');
@@ -205,13 +204,88 @@ class WtjController extends Controller
             return response("<h1>Code nicht gefunden</h1><br>Der Code <b>$share_id</b> existiert nicht im System.", 404);
         }
 
+        $hashedAccessCode = $this->generateHashedAccessCode();
+
         $parameter = [
             'share_id' => $share_id,
             'code' => $loadCode['code'],
             'return' => false,
+            'hashed_access_code' => $hashedAccessCode,
         ];
 
         return view('original/webtigerjython', $parameter);
+    }
+
+    public function wtj_get_uuid(Request $request)
+    {
+        $check = $this->validateRequestFields($request, ['shareId', 'returnId', 'access', 'uuid']);
+        if ($check) {
+            return $check;
+        }
+
+        $access = $request->get('access');
+        $shareId = $request->get('shareId');
+        // todo: handle returnId for visits.
+        $returnId = $request->get('returnId');
+
+        if (!$access) {
+            return response()->json('error: no access', 401);
+        }
+
+        if (!$this->validateHashedAccessCode($access)) {
+            return response()->json('error: access', 401);
+        }
+
+        $uuid = Uuid::createFromRequest($request);
+
+        if ($shareId) {
+            Visits::addVisit($shareId, $uuid);
+        }
+
+        $results = [
+            'uuid' => $uuid,
+        ];
+
+        return response()->json($results);
+    }
+
+    public function wtj_save_visit(Request $request)
+    {
+        $check = $this->validateRequestFields($request, ['shareId', 'returnId', 'access', 'uuid']);
+        if ($check) {
+            return $check;
+        }
+
+        $access = $request->get('access');
+        $uuid = $request->get('uuid');
+        $shareId = $request->get('shareId');
+        // todo: handle returnId for visits.
+        $returnId = $request->get('returnId');
+
+        if (!$access || !$uuid) {
+            return response()->json('error: access && uuid', 401);
+        }
+
+        if (!$this->validateHashedAccessCode($access)) {
+            return response()->json('error: access', 401);
+        }
+
+        if (!Uuid::checkUuid($uuid)) {
+            return response()->json('error: uuid', 401);
+        }
+
+        if ($returnId && $shareId) {
+            Visits::addVisit($shareId . '/' . $returnId, $uuid);
+        }
+        elseif ($shareId) {
+            Visits::addVisit($shareId, $uuid);
+        }
+
+        $results = [
+            'uuid' => $uuid,
+        ];
+
+        return response()->json($results);
     }
 
     public function wtj_get_return_code(Request $request, $share_id, $return_id) {
@@ -222,6 +296,8 @@ class WtjController extends Controller
         }
 
         $markers = $this->stringToArray($loadCode['entry_raw']['wtj_marker']);
+        $hashedAccessCode = $this->generateHashedAccessCode();
+
 
         $parameter = [
             'share_id' => $share_id,
@@ -229,6 +305,7 @@ class WtjController extends Controller
             'code' => $loadCode['code'],
             'markers' => $markers,
             'return' => true,
+            'hashed_access_code' => $hashedAccessCode,
         ];
 
         return view('original/webtigerjython', $parameter);

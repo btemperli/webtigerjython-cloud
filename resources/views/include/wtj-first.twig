@@ -49,12 +49,13 @@
     let state = stateNew;
     let codeOrigin = "";
     let shareId = '';
+    let returnId = '';
     let markers = [];
     let hashedAccessCode = '';
     let uuid = getUuidFromBrowser();
 
     {% if hashed_access_code %}
-    hashedAccessCode = '{{ hashed_access_code }}'
+    hashedAccessCode = '{{ hashed_access_code }}';
     {% endif %}
 
     {% if code %}
@@ -62,8 +63,26 @@
     state = stateShared;
     {% endif %}
 
+
+    {# create uuid if missing: #}
+    function handleUiidVisitors() {
+        {% if code %}
+        if (uuid === '') {
+            getUuidFromApi();
+        } else {
+            saveVisit();
+        }
+        {% else %}
+        console.log('no uuid visitors to register.');
+        {% endif %}
+    }
+
     {% if share_id %}
     shareId = "{{ share_id }}";
+    {% endif %}
+
+    {% if return_id %}
+    returnId = "{{ return_id }}";
     {% endif %}
 
     {% if return %}
@@ -125,12 +144,60 @@
         console.log(uuid);
     }
 
+    function getUuidFromApi() {
+        $.ajax({
+            dataType: 'json',
+            method: 'post',
+            url: getUrl() + '/wtj-uuid',
+            data: {
+                access: hashedAccessCode,
+                uuid: uuid,
+                shareId: shareId,
+                returnId: returnId,
+            },
+            success: (data) => {
+                const uuid = data.uuid;
+                saveUuidToBrowser(uuid);
+            },
+            error: (data, status, error) => {
+                console.log(data);
+                console.log(status);
+                console.log(error);
+                shareFailure("Fehler! No Uuid created...");
+            }
+        });
+    }
+
+    function saveVisit() {
+        $.ajax({
+            dataType: 'json',
+            method: 'post',
+            url: getUrl() + '/wtj-visit',
+            data: {
+                access: hashedAccessCode,
+                uuid: uuid,
+                shareId: shareId,
+                returnId: returnId,
+            },
+            success: (data) => {
+                const uuid = data.uuid;
+                saveUuidToBrowser(uuid);
+            },
+            error: (data, status, error) => {
+                console.log(data);
+                console.log(status);
+                console.log(error);
+                shareFailure("Fehler! No Uuid created...");
+            }
+        });
+    }
+
     function getUuidFromBrowser() {
         const uuid = localStorage.getItem('user_uuid');
 
         if (uuid === null) {
             console.log('Es wurde noch keine UUID gespeichert.');
-            return ''
+            return '';
         }
 
         return uuid;
