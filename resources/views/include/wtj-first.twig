@@ -323,7 +323,9 @@
             data: {
                 share_url: shareId,
                 code: transferableCode,
-                markers: markings
+                markers: markings,
+                access: hashedAccessCode,
+                uuid: uuid
             },
             success: (data) => {
                 const url = `${getUrl()}/${data.share_id}/${data.return_id}`;

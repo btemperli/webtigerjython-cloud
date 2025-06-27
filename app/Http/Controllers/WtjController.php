@@ -174,12 +174,26 @@ class WtjController extends Controller
             return $check;
         }
 
+        $uuid = $request->get('uuid');
+        $access = $request->get('access');
+        if (!$uuid && $access) {
+            if (!$this->validateHashedAccessCode($access)) {
+                return response()->json('error', 401);
+            }
+            $uuid = Uuid::createFromRequest($request);
+        } else {
+            if (!Uuid::checkUuid($uuid)) {
+                return response()->json('error');
+            }
+        }
+
         $code = $request->get('code');
         $randomReturnToken = $this->getRandomToken('wtj_return_token');
         $marker = $request->get('markers');
         $markerString = $this->arrayToString($marker);
+        $shareUrl = $request->get('share_url');
         $entry = [
-            'wtj_token' => $request->get('share_url'),
+            'wtj_token' => $shareUrl,
             'wtj_return_token' => $randomReturnToken,
             'wtj_code' => $code,
             'wtj_marker' => $markerString,
@@ -190,8 +204,10 @@ class WtjController extends Controller
             return response('', 500)->json('save: error');
         }
 
+        Visits::addCreator($shareUrl . '/' . $randomReturnToken, $uuid);
+
         $results = [
-            'share_id' => $request->get('share_url'),
+            'share_id' => $shareUrl,
             'return_id' => $randomReturnToken,
         ];
         return response()->json($results);
@@ -225,7 +241,6 @@ class WtjController extends Controller
 
         $access = $request->get('access');
         $shareId = $request->get('shareId');
-        // todo: handle returnId for visits.
         $returnId = $request->get('returnId');
 
         if (!$access) {
@@ -238,7 +253,10 @@ class WtjController extends Controller
 
         $uuid = Uuid::createFromRequest($request);
 
-        if ($shareId) {
+        if ($returnId && $shareId) {
+            Visits::addVisit($shareId . '/' . $returnId, $uuid);
+        }
+        elseif ($shareId) {
             Visits::addVisit($shareId, $uuid);
         }
 
@@ -259,7 +277,6 @@ class WtjController extends Controller
         $access = $request->get('access');
         $uuid = $request->get('uuid');
         $shareId = $request->get('shareId');
-        // todo: handle returnId for visits.
         $returnId = $request->get('returnId');
 
         if (!$access || !$uuid) {
