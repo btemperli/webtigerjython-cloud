@@ -14,6 +14,20 @@
 </div>
 <script type="text/javascript" src="/assets/js/diff-match-patch.js"></script>
 
+{#{% if visits %}#}
+{#<div style="height: 100vh; width: 100vw; position: fixed; top: 100px; text-align: right">#}
+{#    Besuche#}
+{#    {% for visit in visits %}#}
+{#        <div style="background-color: {{ visit.color }}; background-opacity: 0.4;">#}
+{#            <small>{{ visit.created_at }} | {{ visit.uuid }}</small>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#</div>#}
+{#{% endif %}#}
+
+{% include '../include/admin-visits.twig' %}
+
+
 <script>
     // const { diff, diff_match_patch } = require('diff-match-patch');
 

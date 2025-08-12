@@ -35,5 +35,9 @@ class Visits extends Model
             'is_creator' => false,
         ]);
     }
+
+    public static function getVisits($token) {
+        return self::where('visit_token', $token)->orderBy('created_at')->get();
+    }
 }
 

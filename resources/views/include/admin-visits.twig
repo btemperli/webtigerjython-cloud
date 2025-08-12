@@ -1,0 +1,34 @@
+{% if visits %}
+
+    <div id="visit-widget">
+        <div class="launcher" id="launcher">{{ visits|length }}</div>
+        <div class="panel">
+            {% for visit in visits %}
+                <div class="visit{% if visit.is_creator %} creator{% endif %}">
+                    <div class="color-box" style="background-color: {{ visit.color }}; opacity: 0.4;"></div>
+                    <div>
+                        <div class="uuid" title="{{ visit.uuid }}">
+                            {{ visit.uuid }}
+                        </div>
+                        <div>
+                            {{ visit.created_at }}
+                            | {{ visit.ip }}
+                        </div>
+                        <div class="uuid" title="{{ visit.user_agent }}">
+                            {{ visit.user_agent }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const widget = document.getElementById('visit-widget');
+        const launcher = widget.querySelector('#launcher');
+        launcher.addEventListener('click', () => {
+            widget.classList.toggle('open');
+        });
+    </script>
+
+{% endif %}

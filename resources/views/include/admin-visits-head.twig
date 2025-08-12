@@ -1,0 +1,70 @@
+{% if visits %}
+<style>
+    #visit-widget{
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 50px;
+        height: 50px;
+        z-index: 9999;
+        font-family: system-ui, sans-serif;
+    }
+    #visit-widget .launcher{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #2563eb;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    #visit-widget .panel{
+        position: absolute;
+        right: 0;
+        bottom: calc(64px + 12px);
+        width: 420px;
+        max-height: 0;
+        overflow: hidden;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+        opacity: 0;
+        transition: max-height .25s ease, opacity .15s ease;
+    }
+    #visit-widget.open .panel{
+        max-height: 60vh;
+        opacity: 1;
+        overflow-y: auto;
+    }
+    .visit{
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 6px;
+        margin: 4px;
+        font-size: 11px;
+    }
+    .visit.creator{
+        font-weight: bold;
+        border: 1px solid #2563eb;
+        background-color: rgba(37, 99, 235, 0.1);
+    }
+    .visit .color-box{
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+    .visit .uuid{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+</style>
+{% endif %}

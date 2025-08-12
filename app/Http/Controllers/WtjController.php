@@ -109,6 +109,67 @@ class WtjController extends Controller
         return null; // alles ok
     }
 
+    private function generateDynamicColorPalette(int $count): array
+    {
+        $maxColors = min($count, 30); // ab 30 Wiederholung
+        $step = 360 / $maxColors;
+        $colors = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $hue = ($i % $maxColors) * $step;
+            $colors[] = "hsl($hue, 65%, 45%)";
+        }
+
+        return $colors;
+    }
+
+    /**
+     * Load visitor-infos for this page.
+     * -----------------------
+     *
+     * @param Request $request
+     * @param $visitToken
+     * @return array|false
+     */
+    private function getVisits(Request $request, $visitToken): bool|array
+    {
+        if (!$request->has('admin')) {
+            return false;
+        }
+
+        $allVisits = Visits::getVisits($visitToken);
+        $uuids = $allVisits->pluck('visit_uuid')->unique()->toArray();
+        $uuidData = Uuid::whereIn('uuid_uuid', $uuids)->get()->keyBy('uuid_uuid');
+        $colorPalette = $this->generateDynamicColorPalette(count($uuids));
+        $uuidToColor = [];
+
+        $index = 0;
+        foreach ($uuids as $uuid) {
+            $uuidToColor[$uuid] = $colorPalette[$index];
+            $index += 1;
+        }
+
+        $result = [];
+
+        foreach ($allVisits as $visit) {
+            $uuid = $visit->visit_uuid;
+            $uuidInfo = $uuidData[$uuid] ?? null;
+
+            $result[] = [
+                'visit_token' => $visit->visit_token,
+                'is_creator'  => $visit->is_creator,
+                'uuid'        => $uuid,
+                'created_at'  => $visit->created_at->setTimezone('Europe/Berlin')->format('d.m.Y - H:i'),
+                'ip'          => $uuidInfo->uuid_ip ?? null,
+                'user_agent'  => $uuidInfo->uuid_user_agent ?? null,
+                'color'       => $uuidToColor[$uuid] ?? '#000000', // fallback
+            ];
+        }
+
+        return $result;
+    }
+
+
     /**
      * Create a new controller instance.
      *
@@ -227,6 +288,7 @@ class WtjController extends Controller
             'code' => $loadCode['code'],
             'return' => false,
             'hashed_access_code' => $hashedAccessCode,
+            'visits' => $this->getVisits($request, $share_id),
         ];
 
         return view('original/webtigerjython', $parameter);
@@ -323,6 +385,7 @@ class WtjController extends Controller
             'markers' => $markers,
             'return' => true,
             'hashed_access_code' => $hashedAccessCode,
+            'visits' => $this->getVisits($request, $share_id . '/' . $return_id),
         ];
 
         return view('original/webtigerjython', $parameter);
