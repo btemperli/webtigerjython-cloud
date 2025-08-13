@@ -22,6 +22,7 @@
             <tr>
                 <th scope="col">Code</th>
                 <th scope="col">Antwort</th>
+                <th scope="col">Besuche</th>
                 <th scope="col">Erstellt am</th>
             </tr>
             </thead>
@@ -32,6 +33,11 @@
                     <td>
                         {% if token.wtj_return_token %}
                             <a href="/{{ token.wtj_token }}/{{ token.wtj_return_token }}">{{ token.wtj_token }}/{{ token.wtj_return_token }}</a>
+                        {% endif %}
+                    </td>
+                    <td>{{ token.token_visits_count }}
+                        {% if token.wtj_return_token %}
+                            / {{ token.combo_visits_count }}
                         {% endif %}
                     </td>
                     <td>{{ token.created_at|date('d.m.Y H:i') }}</td>

@@ -3,6 +3,7 @@
 
 namespace App\Model;
 
+use App\Model\Visits;
 use Illuminate\Database\Eloquent\Model;
 
 class WtjToken extends Model
@@ -18,5 +19,10 @@ class WtjToken extends Model
         'wtj_code',
         'wtj_marker'
     ];
+
+    public function token_visits()
+    {
+        return $this->hasMany(Visits::class, 'visit_token', 'wtj_token');
+    }
 }
 

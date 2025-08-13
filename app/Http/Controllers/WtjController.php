@@ -400,6 +400,10 @@ class WtjController extends Controller
         }
 
         $tokens = WtjToken::select('wtj_token', 'wtj_return_token', 'created_at')
+            ->withCount(
+                'token_visits'
+            )
+            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
             ->orderBy('created_at', 'desc')
             ->get();
 
