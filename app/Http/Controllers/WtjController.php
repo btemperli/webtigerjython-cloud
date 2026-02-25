@@ -393,19 +393,27 @@ class WtjController extends Controller
 
     public function admin(Request $request) {
         $correctPassword = $_ENV['ADMIN_LOG_PASSWORD'] ?? null;
-        $inputPassword = $request->query->get('pw');
+        $inputPassword = $request->query('pw');
 
         if (!$correctPassword || $inputPassword !== $correctPassword) {
             return new Response('Zugriff verweigert: Ungültiges Passwort.', Response::HTTP_FORBIDDEN);
         }
 
-        $tokens = WtjToken::select('wtj_token', 'wtj_return_token', 'created_at')
-            ->withCount(
-                'token_visits'
-            )
-            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
+//        $tokens = WtjToken::select('wtj_token', 'wtj_return_token', 'created_at')
+//            ->withCount(
+//                'token_visits'
+//            )
+//            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
+//            ->orderBy('created_at', 'desc')
+//            ->get();
+
+        $tokens = WtjToken::select('id', 'wtj_token', 'wtj_return_token', 'created_at')
+            ->withCount('token_visits')
             ->orderBy('created_at', 'desc')
-            ->get();
+            // Die combo_visits_count Subquery bleibt teuer,
+            // wird jetzt aber nur noch für z.B. 50 Einträge ausgeführt.
+            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
+            ->paginate(1000);
 
         return view('admin', [
             'tokens' => $tokens,
