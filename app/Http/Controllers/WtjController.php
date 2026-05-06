@@ -407,16 +407,41 @@ class WtjController extends Controller
 //            ->orderBy('created_at', 'desc')
 //            ->get();
 
+//        $tokens = WtjToken::select('id', 'wtj_token', 'wtj_return_token', 'created_at')
+//            ->withCount('token_visits')
+//            ->orderBy('created_at', 'desc')
+//            // Die combo_visits_count Subquery bleibt teuer,
+//            // wird jetzt aber nur noch für z.B. 50 Einträge ausgeführt.
+//            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
+//            ->paginate(1000);
+
         $tokens = WtjToken::select('id', 'wtj_token', 'wtj_return_token', 'created_at')
-            ->withCount('token_visits')
+            ->withCount('token_visits') // Falls die Relation "token_visits" im Model definiert ist
             ->orderBy('created_at', 'desc')
-            // Die combo_visits_count Subquery bleibt teuer,
-            // wird jetzt aber nur noch für z.B. 50 Einträge ausgeführt.
-            ->selectRaw('(SELECT COUNT(*) FROM visits WHERE visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)) AS combo_visits_count')
-            ->paginate(1000);
+
+            // Gesamte Besuche für die Kombination (wtj_token / wtj_return_token)
+            ->selectRaw('
+        (SELECT COUNT(*)
+         FROM visits
+         WHERE visits.visit_token = CONCAT(wtj_tokens.wtj_token, "/", wtj_tokens.wtj_return_token)
+        ) AS combo_visits_count'
+            )
+
+            // Eindeutige User (UUIDs) für diese Kombination
+            ->selectRaw('
+    (SELECT COUNT(DISTINCT visit_uuid)
+     FROM visits
+     WHERE visits.visit_token = wtj_tokens.wtj_token
+    ) AS unique_visitors_count'
+            )
+
+            ->paginate(500);
+
+        $totalTokensCount = WtjToken::count();
 
         return view('admin', [
             'tokens' => $tokens,
+            'all_tokens' => $totalTokensCount,
             'count' => sizeof($tokens),
         ]);
     }

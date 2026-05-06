@@ -9,11 +9,11 @@
     </style>
 {% endblock %}
 
-{% block title %}{{ count }} Codes{% endblock %}
+{% block title %}{{ all_tokens }} Codes{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">{{ count }} Codes</h1>
+        <h1 class="h3">{{ all_tokens }} Codes</h1>
     </div>
 
     <div class="table-responsive">
@@ -29,7 +29,7 @@
             <tbody>
             {% for token in tokens %}
                 <tr>
-                    <td><a href="/{{ token.wtj_token }}">{{ token.wtj_token }}</a></td>
+                    <td><a href="/{{ token.wtj_token }}?admin" target="_blank">{{ token.wtj_token }}</a></td>
                     <td>
                         {% if token.wtj_return_token %}
                             <a href="/{{ token.wtj_token }}/{{ token.wtj_return_token }}">{{ token.wtj_token }}/{{ token.wtj_return_token }}</a>
@@ -39,6 +39,7 @@
                         {% if token.wtj_return_token %}
                             / {{ token.combo_visits_count }}
                         {% endif %}
+                        ({{ token.unique_visitors_count }})
                     </td>
                     <td>{{ token.created_at|date('d.m.Y H:i') }}</td>
                 </tr>
